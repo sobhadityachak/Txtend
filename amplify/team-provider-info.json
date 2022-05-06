@@ -1,0 +1,27 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-txtendpasswordphonep-staging-113835-authRole",
+      "UnauthRoleArn": "arn:aws:iam::066613758898:role/amplify-txtendpasswordphonep-staging-113835-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::066613758898:role/amplify-txtendpasswordphonep-staging-113835-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-txtendpasswordphonep-staging-113835-deployment",
+      "UnauthRoleName": "amplify-txtendpasswordphonep-staging-113835-unauthRole",
+      "StackName": "amplify-txtendpasswordphonep-staging-113835",
+      "StackId": "arn:aws:cloudformation:us-east-1:066613758898:stack/amplify-txtendpasswordphonep-staging-113835/3cd5f750-c943-11ec-b624-12b4997d396b",
+      "AmplifyAppId": "d26dstmfjia4la"
+    },
+    "categories": {
+      "function": {
+        "getStreamToken": {
+          "discordStreamKey": "d2sx6cyu72g8",
+          "discordStreamSecret": "ahrcgm2urv4ndh5t7s267wp9bh6yzvvsnajm323299uftkeevtnfy8qvqyq8223e",
+          "txtendStreamKey": "bhqgn9436zjx",
+          "txtendStreamSecret": "zwhtt6ee7dnbsyx53h9fqddvf5pk5kxj5sq5cfp7kpqtmfyrxy8pkecyyrbzthf2",
+          "deploymentBucketName": "amplify-txtendpasswordphonep-staging-113835-deployment",
+          "s3Key": "amplify-builds/getStreamToken-30613156692f4a536734-build.zip"
+        }
+      }
+    }
+  }
+}
