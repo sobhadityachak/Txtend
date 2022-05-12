@@ -16,15 +16,15 @@ import { ActivityIndicator, ColorSchemeName, View } from "react-native";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import CustomSignUpScreen from "../screens/CustomSignUpScreen";
+import CustomSignUpScreen from "../screens/authentication/CustomSignUpScreen";
 import { useAuthContext } from "../contexts/AuthContext";
 import DrawerNavigator from "./DrawerNavigateScreens";
 import {Auth, Hub} from 'aws-amplify';
 
-import SignInScreen from "../screens/SignIn";
-import ConfirmEmailScreen from "../screens/ConfirmPhoneScreen";
-import ForgotPasswordScreen from "../screens/ForgetPasswordScreen";
-import NewPasswordScreen from "../screens/NewPasswordScreen";
+import SignInScreen from "../screens/authentication/SignIn";
+import ConfirmEmailScreen from "../screens/authentication/ConfirmPhoneScreen";
+import ForgotPasswordScreen from "../screens/authentication/ForgetPasswordScreen";
+import NewPasswordScreen from "../screens/authentication/NewPasswordScreen";
 import AppLoading from "expo-app-loading";
 
 export default function Navigation({

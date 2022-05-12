@@ -2,28 +2,30 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
-import { Text, StyleSheet, View, Pressable, Touchable, Image, TextBase, BackHandler } from "react-native";
+import { Text, StyleSheet, View, Pressable, Touchable,  TextBase, BackHandler, ActivityIndicator } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { ChannelList, OverlayProvider } from "stream-chat-expo";
-import { useAuthContext } from "../contexts/AuthContext";
-import ChannelScreen from "../screens/ChannelScreen";
+import { useAuthContext, useUserContext } from "../contexts/AuthContext";
+// import ChannelScreen from "../screens/chatScreens/ChannelScreen";
 // import { Auth } from "aws-amplify";
 import React, { useState } from "react";
 import UserListScreen from "../screens/UserListScreen";
 // import Button from "../components/Button";
-import ChannelMembersScreen from "../screens/ChannelMembersScreen";
+// import ChannelMembersScreen from "../screens/chatScreens/ChannelMembersScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
 import NewChannelScreen from "../screens/NewChannelScreen";
 import ChannelStack from "./ChannelStack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 // import { favCon } from "../../assets/profile.jpg";
 import Navigation from ".";
-import SignUpScreen from "../screens/SignUpScreen";
+import SignUpScreen from "../screens/authentication/SignUpScreen";
 // import Colors from "../constants/Colors";
-import { AntDesign } from '@expo/vector-icons';
-import { FloatingAction } from "react-native-floating-action";
-import { FAB, Button, Icon } from "@rneui/themed"
-import SettingScreen from "../screens/SettingScreen";
+// import { AntDesign } from '@expo/vector-icons';
+// import { FloatingAction } from "react-native-floating-action";
+import { Button, Icon, Image} from "@rneui/themed"
+import SettingScreen from "../screens/settings/SettingScreen";
+import GroupChats from "../screens/channels/GroupchatScreen";
+// import { Auth } from "aws-amplify";
 
 const Drawer = createDrawerNavigator();
 // const CustomHead (...props) => {
@@ -139,11 +141,32 @@ const DrawerNavigator = () => {
   );
 };
 
+const CustomProfile = () => {
+  // const userData = await Auth.currentAuthenticatedUser();
+  // const picture  = userData.attributes;
+  const { picId } = useUserContext();
+  const picture =require('../../assets/images/Logo.png');
+  console.warn(picId);
+  return (
+    <View>
+      <Image
+            style={styles.profile}
+            source={{uri:picId}}
+            resizeMode='contain'
+            borderRadius={1000}
+            PlaceholderContent={<ActivityIndicator />}
+          // style={{styles.profile}} 
+           /> 
+     <Text style={{ margin: 5 }}> +91 7005183122</Text>
+    </View>
+  )
+}
 
 const CustomDrawerContent = (props) => {
   // const [tab, setTab] = useState("private");
   const { navigation } = props;
-
+  
+    
   const logout = () => {
     // Auth.signOut();
     console.log("user _log out")
@@ -162,15 +185,15 @@ const CustomDrawerContent = (props) => {
             alignItems: 'center',
             // borderRadius: 200,
           }}>
-
-          <Image
+            <CustomProfile {...props}/>
+          {/* <Image
             style={styles.profile}
-            source={require('../../assets/images/Logo.png')}
+            source={}
             resizeMode='contain'
             borderRadius={1000}
 
           // style={{styles.profile}} 
-          />
+          /> */}
           {/* <Text style={{ margin: 5 }}> +91 7005183122</Text> */}
         </TouchableOpacity>
       </View>
@@ -556,142 +579,7 @@ const styles = StyleSheet.create({
 //   );
 // };
 
-const GroupChats = (props) => {
-  const { userId } = useAuthContext();
 
-  const { navigation } = props;
-
-  const onChannelSelect = (channel) => {
-    // console.log('press')
-    // navigate to a screen for this channel
-    navigation.navigate("ChannelScreen", {
-      screen: "Chat",
-      params: { channel },
-    });
-  };
-  const onChannelCreate = () => {
-    // console.log('press')
-    // navigate to a screen for this channel
-    navigation.jumpTo("NewChannel");
-  };
-  const publicFilters = {
-    type: { $ne: "messaging" },
-    members: { $in: [userId] },
-  };
-  const groupPreview = (props) => {
-    const { channel, setActiveChannel } = props;
-    // const {}
-    return (
-      <View>{channel.data.name}</View>)
-  }
-  return (
-    <OverlayProvider >
-      <SafeAreaView style={{ height: 120, }}>
-        <View style={{
-          // color: 'white',
-          // opacity: 1,
-          flexDirection: "row",
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-          // margin: 10,
-          height: 90,
-          alignContent: 'space-between',
-          // borderBottomRightRadius: 30,
-          backgroundColor: 'white',
-          // borderBottomWidth: 50,
-          // borderBottomColor: 'lightgray',
-          // borderBottomEndRadius: -320,
-        
-        }}>
-          <Icon
-            containerStyle={{
-              width: 60,
-              height: 40,
-              alignContent: 'center',
-              justifyContent: 'center',
-
-            }}
-            raised
-            reverse
-            solid
-            size={30}
-            name='chevrons-right'
-            type='feather'
-            color='#4c8bf5'
-            // color='blue'
-            onPress={() => navigation.openDrawer()}
-
-          />
-          <Text style={{ fontWeight: '700', fontSize: 18, marginHorizontal: 50, }}>Group Chats</Text>
-          <Button
-            raised
-            onPress={onChannelCreate}
-            title="Group +"
-            // icon={{
-            //   name: 'dingding',
-            //   type: 'ant-design',
-            //   size: 20,
-            //   color: 'rgba(90, 154, 230, 1)',
-            // }}
-            iconContainerStyle={{ marginRight: 10 }}
-            titleStyle={{ fontWeight: '600', color: '#4c8bf5' }}
-            buttonStyle={{
-              backgroundColor: 'transparent',
-              borderColor: 'gray',
-              borderWidth: 0,
-              borderRadius: 30,
-              // width: 10,
-              height: 45,
-              // shadowRadius: 1,
-              // shadowOffset: {width: 5, height: 15},
-              // shadowColor: 'black',
-              // shadowOpacity: 1,
-              // borderRadius: 2,
-            }}
-            containerStyle={{
-              width: 100,
-              marginHorizontal: 0,
-              marginVertical: 5,
-              // marginBottom: 15,
-              borderRadius: 30,
-              // marginStart: 80,
-            }}
-          />
-          {/* <View style={{
-      height:50,
-       width:150, 
-       backgroundColor:'blue',
-       borderRadius: 30,
-       justifyContent:"center",
-       alignContent: "center",
-       alignItems: "center",
-       alignSelf: "center",
-       opacity: 200,
-       margin:0,
-       shadowRadius:2,
-       }}> */}
-          {/* <Pressable onPress={onChannelCreate}>
-      <Text>Start A Group</Text> */}
-          {/* <FloatingAction  */}
-          {/* // onPressMain={} */}
-          {/* /> */}
-          {/* </Pressable>
-    </View>
-    </View> */}
-          {/* <FAB
-              color="blue"
-               activeOpacity={1}
-              
-              icon={{ name: 'plus', color: 'white', size:20, }}
-            /> */}
-        </View>
-      </SafeAreaView>
-
-      <ChannelList onSelect={onChannelSelect} filters={publicFilters} />
-    </OverlayProvider>
-
-  )
-}
 
 const AllChats = (props) => {
   const { userId } = useAuthContext();
@@ -832,38 +720,48 @@ const Dms = (props) => {
       }}>
         <Icon
           containerStyle={{
-            width: 60,
-            height: 40,
+            width: 55,
+            height: 50,
             alignContent: 'center',
             justifyContent: 'center',
             marginRight: 0,
           }}
           raised
-          reverse
+          // reverse
           solid
-          size={30}
-          name='chevrons-right'
-          type='feather'
+          size={25}
+          // name='angle-dobule-right'
+          // type='fontisto'
+          name='user'
+          type='ant-design'
           color='#4c8bf5'
           // color='blue'
           onPress={() => navigation.openDrawer()}
 
         />
-        <Text style={{ fontWeight: '700', fontSize: 18, marginHorizontal: 33, }}>Direct messages</Text>
+        <Text style={{ 
+          fontWeight: '700', 
+          fontSize: 18,
+          marginHorizontal: 33,
+          // color:"white"
+        }}>Direct messages</Text>
         <Button
           raised
+          
           onPress={onNewChat}
-          title="+ Chat"
-          // icon={{
-          //   name: 'dingding',
-          //   type: 'ant-design',
-          //   size: 20,
-          //   color: 'rgba(90, 154, 230, 1)',
-          // }}
-          // iconContainerStyle={{ }}
-          titleStyle={{ fontWeight: '600', color: '#4c8bf5' }}
+          title="Chat"
+          // titleStyle={{color: 'white'}}
+          icon={{
+            name: 'barcode',
+            type: 'ant-design',
+            size: 20,
+            color: 'transparent',
+            reverse: true,
+          }}
+          iconContainerStyle={{ }}
+          titleStyle={{ fontWeight: '500', color: 'white' }}
           buttonStyle={{
-            backgroundColor: 'white',
+            // backgroundColor: '#4c8bf5',
             borderColor: 'gray',
             borderWidth: 0,
             borderRadius: 30,
@@ -874,15 +772,17 @@ const Dms = (props) => {
             // shadowColor: 'black',
             // shadowOpacity: 1,
             // borderRadius: 2,
+            
           }}
           containerStyle={{
-            width: 100,
-            marginHorizontal: 0,
-            marginVertical: 5,
+            width: 105,
+            // marginHorizontal: 0,
+            // marginVertical: 5,
             // marginBottom: 15,
             borderRadius: 30,
             // marginStart: 80,
             // alignSelf: 
+          backgroundColor: '#4c8bf5'
           }}
         />
       </View>

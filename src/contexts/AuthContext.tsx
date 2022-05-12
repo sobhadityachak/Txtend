@@ -28,10 +28,17 @@ import React from 'react';
 const AuthContext = createContext({
   userId: null,
   setUserId: (newId: string) => {},
+  
+});
+const userContext = createContext({
+  picId: "",
+  setPicId: (newId: string) => {},
+  
 });
 
-const AuthContextComponent = ({ children, client }) => {
+const AuthContextComponent = ({ children, client, }) => {
   const [userId, setUserId] = useState(null);
+  const [picId, setPicId] = useState("");
 
   const connectStreamChatUser = async () => {
     const userData = await Auth.currentAuthenticatedUser();
@@ -43,7 +50,7 @@ const AuthContextComponent = ({ children, client }) => {
       Alert.alert("Failed to creat ID check your connection and retry...!");
       return;
     }else console.warn(token);
-    console.warn(userData);
+    console.warn(picture);
     await client.connectUser(
       {
         id: sub,
@@ -59,6 +66,7 @@ const AuthContextComponent = ({ children, client }) => {
     await channel.watch();
 
     setUserId(sub);
+    setPicId(picture);
   };
 
   useEffect(() => {
@@ -66,7 +74,7 @@ const AuthContextComponent = ({ children, client }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ userId, setUserId }}>
+    <AuthContext.Provider value={{ userId, setUserId, picId, setPicId }}>
       {children}
     </AuthContext.Provider>
   );
@@ -75,3 +83,4 @@ const AuthContextComponent = ({ children, client }) => {
 export default AuthContextComponent;
 
 export const useAuthContext = () => useContext(AuthContext);
+export const useUserContext = () => useContext(userContext);

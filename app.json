@@ -2,7 +2,7 @@
   "expo": {
     "name": "Txtend",
     "slug": "txtend",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/logo1.png",
     "scheme": "myapp",
@@ -19,18 +19,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.txtend.myapp"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo1.png",
-        "backgroundColor": "#ffffff"
-      },
+      "permissions": [],
       "package": "com.txtend.myapp",
-      "versioncode": 1
-    },
-    "web": {
-      "favicon": "./assets/images/logo1.png"
+      "versionCode": 5
     }
+  },
+  "web": {
+    "favicon": "./assets/images/logo1.png"
   }
 }

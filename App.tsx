@@ -11,10 +11,10 @@ import Navigation from "./src/navigation";
 import { StreamChat } from "stream-chat";
 import { OverlayProvider, Chat, Theme, DeepPartial } from "stream-chat-expo";
 import AuthContext from "./src/contexts/AuthContext";
-import { StreamColors } from "./src/constants/Colors";
+// import { StreamColors } from "./src/constants/Colors";
 import React from "react";
-import { Amplify, Analytics, Auth } from "aws-amplify";
-import { withAuthenticator } from "aws-amplify-react-native";
+import { Amplify, } from "aws-amplify";
+// import { withAuthenticator } from "aws-amplify-react-native";
 import awsconfig from "./src/aws-exports";
 // import React = require("react");
 //import auth from '@react-native-firebase/auth';
@@ -30,7 +30,7 @@ import awsconfig from "./src/aws-exports";
 // });
 Amplify.configure({
   ...awsconfig, 
-  Analytics:{disabled: true},
+  Analytics:{disabled: false},
 })
 
 

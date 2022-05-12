@@ -2,8 +2,8 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React, { useState, useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
-import ChannelMembersScreen from "../screens/ChannelMembersScreen";
-import ChannelScreen from "../screens/ChannelScreen";
+import ChannelMembersScreen from "../screens/chatScreens/ChannelMembersScreen";
+import ChannelScreen from "../screens/chatScreens/ChannelScreen";
 import InviteMembersScreen from "../screens/InviteMembersScreen";
 import { AntDesign } from "@expo/vector-icons";
 
