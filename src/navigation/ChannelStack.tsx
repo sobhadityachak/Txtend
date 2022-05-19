@@ -11,6 +11,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import { useAuthContext } from "../contexts/AuthContext";
 import { ChannelAvatar, useChatContext } from "stream-chat-expo";
 import { FAB, Button, Icon } from "@rneui/themed"
+import qrcodeScanner from "../screens/barcode/qrcodeScanner";
 
 const Stack = createNativeStackNavigator();
 // const { user } = useAuthContext();
@@ -70,6 +71,10 @@ const ChannelStack = () => {
         component={InviteMembersScreen}
         options={{ headerTransparent: false, }}
       />
+      <Stack.Screen
+        name="qrScanner"
+        component={qrcodeScanner}
+        />
     </Stack.Navigator>
   );
 };

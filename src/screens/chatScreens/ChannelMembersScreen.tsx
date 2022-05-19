@@ -4,7 +4,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import UserListItem from "../../components/UserListItem";
 // import Button from "../components/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ChannelAvatar } from "stream-chat-expo";
+import { ChannelAvatar, GroupAvatar } from "stream-chat-expo";
 
 // import React, { useState, useEffect } from 'react';
 import { Image, Platform, TouchableOpacity, StyleSheet } from 'react-native';
@@ -382,7 +382,7 @@ const GroupSetting = () => {
 
   const _mute = () => console.log('mute this group');
 
-  const _sharelink = () => console.log('share joining link');
+  const _sharelink = () => navigation.navigate("qrScanner")
 
   const _addmembers = () => {
 
@@ -440,7 +440,8 @@ const GroupSetting = () => {
             backgroundColor: 'transparent',
             flexDirection: 'row'
           }}>
-            <ChannelAvatar channel={channel} />
+            <GroupAvatar size={100} />
+            {/* <ChannelAvatar channel={channel} /> */}
             {/* </TouchableOpacity> */}
           </View>
 

@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/drawer";
 import { Text, StyleSheet, View, Pressable, Touchable,  TextBase, BackHandler, ActivityIndicator } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { ChannelList, OverlayProvider } from "stream-chat-expo";
+import { Avatar, ChannelList, OverlayProvider } from "stream-chat-expo";
 import { useAuthContext, useUserContext } from "../contexts/AuthContext";
 // import ChannelScreen from "../screens/chatScreens/ChannelScreen";
 // import { Auth } from "aws-amplify";
@@ -62,6 +62,11 @@ const DrawerNavigator = () => {
         headerShown: false
       }}
     >
+            <Drawer.Screen
+        name="AllChats"
+        component={AllChats}
+        options={{ title: "All Chats" }}
+      />
       <Drawer.Screen
 
         name="DMs"
@@ -71,11 +76,7 @@ const DrawerNavigator = () => {
           // drawerLabel: {{focused: true, color:'white'}}
         }}
       />
-      <Drawer.Screen
-        name="AllChats"
-        component={AllChats}
-        options={{ title: "All Chats" }}
-      />
+
 
       <Drawer.Screen
         name="ChannelScreen"
@@ -144,19 +145,20 @@ const DrawerNavigator = () => {
 const CustomProfile = () => {
   // const userData = await Auth.currentAuthenticatedUser();
   // const picture  = userData.attributes;
-  const { picId } = useUserContext();
-  const picture =require('../../assets/images/Logo.png');
-  console.warn(picId);
+  // const { picId } = useUserContext();
+  // const picture =require('../../assets/images/Logo.png');
+  // console.warn(picId);
   return (
     <View>
-      <Image
+      {/* <Image
             style={styles.profile}
             source={{uri:picId}}
             resizeMode='contain'
             borderRadius={1000}
             PlaceholderContent={<ActivityIndicator />}
           // style={{styles.profile}} 
-           /> 
+           />  */}
+      <Avatar size={50} />
      <Text style={{ margin: 5 }}> +91 7005183122</Text>
     </View>
   )

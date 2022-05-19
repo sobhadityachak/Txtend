@@ -3,8 +3,8 @@ import { Button } from "@rneui/themed";
 import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { OverlayProvider, ChannelList } from "stream-chat-expo";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { OverlayProvider, ChannelList, ChannelListMessenger } from "stream-chat-expo";
+import { useAuthContext, useUserContext } from "../../contexts/AuthContext";
 
 const GroupChats = (props) => {
 
@@ -13,9 +13,11 @@ const GroupChats = (props) => {
     const { userId } = useAuthContext();
   
     const { navigation } = props;
+
+    // const { channels  } = useUserContext();
   
     const onChannelSelect = (channel) => {
-      // console.log('press')
+      // console.log(channel);
       // navigate to a screen for this channel
       navigation.navigate("ChannelScreen", {
         screen: "Chat",
@@ -141,6 +143,10 @@ const GroupChats = (props) => {
         </SafeAreaView>
   
         <ChannelList onSelect={onChannelSelect} filters={publicFilters} />
+        {/* <ChannelListMessenger
+ channels={channels}
+ additionalFlatListProps={{ bounces: true }}
+/> */}
       </OverlayProvider>
   
     )

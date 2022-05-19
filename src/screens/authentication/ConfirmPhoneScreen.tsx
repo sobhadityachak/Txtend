@@ -30,7 +30,7 @@ const ConfirmEmailScreen = () => {
     } catch (e) {
       Alert.alert('Oops', e.message);
     }
-  };
+  }; 
 
   const onSignInPress = () => {
     navigation.navigate('SignIn');

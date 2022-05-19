@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { Channel, MessageList, MessageInput, ChannelAvatar, useChatContext } from "stream-chat-expo";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -9,14 +9,14 @@ import { Icon } from "@rneui/themed";
 const ChannelScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const channel = route.params?.channel;
+  const channel = route?.params?.channel;
   //param is null initaially thats why we have to access
   //it safely using '?'
 
   // navigation.setOptions({ title: channel?.data?.name || "Channel" });
 
   // useEffect(() => {
-  //   console.log(chanel.data)
+  //   console.log(channel)
 
   //   return () => {
   //   }
@@ -50,7 +50,7 @@ const ChannelScreen = () => {
 
           {/* useChatContext to show channel memberCount and active members */}
 
-          <Text>${channel.name}</Text>
+          <Text>{channel?._user?.name}</Text>
         </View>
 
         {/* <ChannelPreviewTitle channel={channel} displayName={"df"}/> */}

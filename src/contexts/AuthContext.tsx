@@ -31,7 +31,7 @@ const AuthContext = createContext({
   
 });
 const userContext = createContext({
-  picId: "",
+  picId: undefined,
   setPicId: (newId: string) => {},
   
 });
@@ -50,7 +50,7 @@ const AuthContextComponent = ({ children, client, }) => {
       Alert.alert("Failed to creat ID check your connection and retry...!");
       return;
     }else console.warn(token);
-    console.warn(picture);
+    // console.warn(picture);
     await client.connectUser(
       {
         id: sub,
@@ -64,9 +64,11 @@ const AuthContextComponent = ({ children, client, }) => {
 
     const channel = client.channel("livestream", "public", { name: "Public" });
     await channel.watch();
+    // const channels = client.channels();
 
     setUserId(sub);
     setPicId(picture);
+    // console.log(sub)
   };
 
   useEffect(() => {
