@@ -3,8 +3,8 @@ import { View, Text, SafeAreaView,StyleSheet } from "react-native";
 import React from "react";
 import { OverlayProvider, useChatContext } from "stream-chat-expo";
 import { FlatList } from "react-native-gesture-handler";
-import UserListItem from "../components/UserListItem";
-import { useAuthContext } from "../contexts/AuthContext";
+import UserListItem from "../../components/UserListItem";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import { Icon, Button } from "@rneui/base";
 

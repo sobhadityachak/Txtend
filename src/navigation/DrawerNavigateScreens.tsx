@@ -8,8 +8,8 @@ import { Avatar, ChannelList, OverlayProvider } from "stream-chat-expo";
 import { useAuthContext, useUserContext } from "../contexts/AuthContext";
 // import ChannelScreen from "../screens/chatScreens/ChannelScreen";
 // import { Auth } from "aws-amplify";
-import React, { useState } from "react";
-import UserListScreen from "../screens/UserListScreen";
+import React, { useEffect, useState } from "react";
+import UserListScreen from "../screens/userlist/UserListScreen";
 // import Button from "../components/Button";
 // import ChannelMembersScreen from "../screens/chatScreens/ChannelMembersScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -25,6 +25,9 @@ import SignUpScreen from "../screens/authentication/SignUpScreen";
 import { Button, Icon, Image} from "@rneui/themed"
 import SettingScreen from "../screens/settings/SettingScreen";
 import GroupChats from "../screens/channels/GroupchatScreen";
+import qrCodeGenerator from "../screens/barcode/qrcodeGenerator";
+import { Auth } from "aws-amplify";
+import QrCodeGenerator from "../screens/barcode/qrcodeGenerator";
 // import { Auth } from "aws-amplify";
 
 const Drawer = createDrawerNavigator();
@@ -137,29 +140,53 @@ const DrawerNavigator = () => {
         name="AddMembers"
         component={ChannelStack}
       />
+      <Drawer.Screen
+        name="qrGenerator"
+        component={QrCodeGenerator}
+      />
     </Drawer.Navigator>
 
   );
 };
 
-const CustomProfile = () => {
-  // const userData = await Auth.currentAuthenticatedUser();
-  // const picture  = userData.attributes;
+const CustomProfile =  () => {
+  const [userName,setUserName] = useState('');
+  // const [picture,setUserPicture]  = useState('');
+  const [number, setUserNumber] = useState('');
   // const { picId } = useUserContext();
   // const picture =require('../../assets/images/Logo.png');
   // console.warn(picId);
+
+  // route or async
+
+  const getUserData = async () => {
+      const userData = await Auth.currentAuthenticatedUser();
+      const { username, preferred_username } = userData.attributes;
+      setUserName(preferred_username);
+      // setUserPicture(picture);
+      setUserNumber(username);
+  }
+
+  useEffect(() => {
+    getUserData();
+  
+  }, [])
+  
   return (
-    <View>
+    <View style={styles.profile}>
       {/* <Image
             style={styles.profile}
-            source={{uri:picId}}
+            source={{uri:picture}}
             resizeMode='contain'
             borderRadius={1000}
             PlaceholderContent={<ActivityIndicator />}
           // style={{styles.profile}} 
            />  */}
-      <Avatar size={50} />
-     <Text style={{ margin: 5 }}> +91 7005183122</Text>
+      <Avatar size={50} containerStyle={styles.profile}/>
+     
+     <Text style={{ margin: 5 }}>{userName}</Text>
+     <Text style={{ margin: 5 }}>{number}</Text>
+
     </View>
   )
 }
@@ -182,6 +209,9 @@ const CustomDrawerContent = (props) => {
 
       <View style={{ height: 200, }}>
         <TouchableOpacity
+          onPress={()=>(
+            navigation.navigate('qrGenerator')
+          )}
           style={{
             justifyContent: 'center',
             alignItems: 'center',

@@ -43,12 +43,13 @@ const styles = StyleSheet.create({
   container: {
     justifyContent:'center',
     backgroundColor: 'white',
-    width: '100%',
-    height: 45,
+    width: 280,
+    height: 65,
     borderColor: '#e8e8e8',
     borderWidth: 1,
-    borderRadius: 5,
-    
+    borderRadius: 30,
+    //marginTop: 20,
+    marginTop: 30,
     paddingHorizontal: 10,
     marginVertical: 5,
   },

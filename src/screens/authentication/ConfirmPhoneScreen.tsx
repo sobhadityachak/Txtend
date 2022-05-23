@@ -24,11 +24,17 @@ const ConfirmEmailScreen = () => {
   const onConfirmPressed = async data => {
     try {
       await Auth.confirmSignUp(data.username, data.code);
-      await Auth.signIn(data.username, data.password);
-      navigation.goBack();
-    Alert.alert("verfied","Your phone is verified Please sign in your account")
+
+    Alert.alert("verfied","Congratulations Your are all Set!"); 
     } catch (e) {
       Alert.alert('Oops', e.message);
+    }
+
+    try {
+      await Auth.signIn(data.username, data.password);
+      navigation.goBack();
+    } catch (error) {
+      Alert.alert('Oops',error.message);
     }
   }; 
 
@@ -48,7 +54,7 @@ const ConfirmEmailScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
-        <Text style={styles.title}>Confirm your email</Text>
+        <Text style={styles.title}>Confirm your Phone number</Text>
 
         <CustomInput
           name="username"

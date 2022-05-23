@@ -21,11 +21,12 @@ import { useAuthContext } from "../contexts/AuthContext";
 import DrawerNavigator from "./DrawerNavigateScreens";
 import {Auth, Hub} from 'aws-amplify';
 
-import SignInScreen from "../screens/authentication/SignIn";
+import FinalSignInScreen from "../screens/authentication/finalSignIn";
 import ConfirmEmailScreen from "../screens/authentication/ConfirmPhoneScreen";
-import ForgotPasswordScreen from "../screens/authentication/ForgetPasswordScreen";
-import NewPasswordScreen from "../screens/authentication/NewPasswordScreen";
+// import ForgotPasswordScreen from "../screens/authentication/ForgetPasswordScreen";
+// import NewPasswordScreen from "../screens/authentication/NewPasswordScreen";
 import AppLoading from "expo-app-loading";
+import FinalSignUpScreen from "../screens/authentication/finalSignUp";
 
 export default function Navigation({
   colorScheme,
@@ -102,14 +103,14 @@ function RootNavigator() {
           <Stack.Screen name="Root" component={DrawerNavigator} />
         ) : (
           <>
-            <Stack.Screen name="SignIn" component={SignInScreen} />
-            <Stack.Screen name="SignUp" component={CustomSignUpScreen} />
+            <Stack.Screen name="SignUp" component={FinalSignUpScreen} />
+            <Stack.Screen name="SignIn" component={FinalSignInScreen} />
             <Stack.Screen name="ConfirmPhone" component={ConfirmEmailScreen} />
-            <Stack.Screen
+            {/* <Stack.Screen
               name="ForgotPassword"
               component={ForgotPasswordScreen}
-            />
-            <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
+            /> */}
+            {/* <Stack.Screen name="NewPassword" component={NewPasswordScreen} /> */}
       {/* <Stack.Screen
         name="Root"
         component={DrawerNavigator}

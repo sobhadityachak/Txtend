@@ -9,7 +9,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import ChannelScreen from "../screens/chatScreens/ChannelScreen";
 // import { Auth } from "aws-amplify";
 import React, { useState } from "react";
-import UserListScreen from "../screens/UserListScreen";
+import UserListScreen from "../screens/userlist/UserListScreen";
 import Button from "../components/Button";
 import ChannelMembersScreen from "../screens/chatScreens/ChannelMembersScreen";
 import { FontAwesome5 } from "@expo/vector-icons";

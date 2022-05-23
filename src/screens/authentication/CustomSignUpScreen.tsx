@@ -35,7 +35,7 @@ const SignUpScreen = () => {
         },
       });
 
-      navigation.replace('ConfirmPhone', { username });
+      navigation.replace('ConfirmPhone', { username, password });
     } catch (e) {
       Alert.alert('Oops', e.message);
     }
@@ -61,10 +61,10 @@ const SignUpScreen = () => {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0.8,
     });
 
-    console.log(result);
+    // console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);

@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const CustomButton = ({onPress, text, type = 'PRIMARY', bgColor, fgColor}) => {
   return (
@@ -26,15 +27,20 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
 
-    padding: 15,
+    padding: 20,
     marginVertical: 5,
+    
+    alignSelf: 'center',
+    marginTop:0,
 
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 35,
   },
 
   container_PRIMARY: {
     backgroundColor: '#3B71F3',
+    paddingHorizontal:70,
+    marginTop:30,
   },
 
   container_SECONDARY: {
@@ -42,7 +48,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
 
-  container_TERTIARY: {},
+  container_TERTIARY: {
+    paddingHorizontal:10,
+    marginBottom:-45,
+
+  },
 
   text: {
     fontWeight: 'bold',
