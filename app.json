@@ -20,15 +20,18 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.txtend.myapp"
+      "bundleIdentifier": "com.interesingTechnologies.txtend"
     },
     "android": {
       "permissions": [],
-      "package": "com.txtend.myapp",
-      "versionCode": 5
-    }
+      "package": "com.interestingTechnologies.txtend",
+      "versionCode": 5,
+      "googleServiceFiles": "./google-services.json"
   },
   "web": {
     "favicon": "./assets/images/logo1.png"
+  },
+  "plugins": 
+    ["@react-native-firebase/app"]
   }
 }

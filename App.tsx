@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import "react-native-get-random-values";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -18,6 +18,7 @@ import { Amplify, } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
 // import React = require("react");
 //import auth from '@react-native-firebase/auth';
+// import messaging from '@react-native-firebase/messaging'
 
 // Amplify.configure({ 
 //   ...awsconfig, 
@@ -29,8 +30,8 @@ import awsconfig from "./src/aws-exports";
 //   }
 // });
 Amplify.configure({
-  ...awsconfig, 
-  Analytics:{disabled: false},
+  ...awsconfig,
+  Analytics: { disabled: false },
 })
 
 
@@ -43,28 +44,34 @@ const client = StreamChat.getInstance(API_KEY);
 
 function App() {
   const isLoadingComplete = useCachedResources();
+ 
+  const [userId, setUserId] = useState(undefined);
 
-  useEffect(() => {
+  // Request Push Notification permission from device.
+
+
+  // useEffect(() => {
     // this is done when component mounts
-    return () => {
-      // this is done when component unmounts
-      // client.disconnectUser();
-    };
-  }, []);
+    // return () => {
+    //   // this is done when component unmounts
+    //   // client.disconnectUser();
+    // };
+    // requestPermission();
+  // }, []);
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <AuthContext client={client}>
+        <AuthContext client={client} value={{userId, setUserId}}>
           <OverlayProvider >
             <Chat client={client}>
               <Navigation colorScheme={"light"} />
             </Chat>
           </OverlayProvider>
         </AuthContext>
-        <StatusBar style="dark" />
+        <StatusBar style="auto" />
       </SafeAreaProvider>
     );
   }

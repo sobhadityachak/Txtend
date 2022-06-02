@@ -1,11 +1,10 @@
 import { Icon, Button } from "@rneui/base";
-// import { Button } from "@rneui/themed";
 import React from "react";
 import { SafeAreaView, View, Text } from "react-native";
-import { OverlayProvider, ChannelList } from "stream-chat-expo";
+import { OverlayProvider } from "stream-chat-expo";
 import { useAuthContext } from "../../contexts/AuthContext";
 
-const AllChats = (props) => {
+const FavouritesScreen = (props) => {
     const { userId } = useAuthContext();
   
     const { navigation } = props;
@@ -17,13 +16,8 @@ const AllChats = (props) => {
         params: { channelId: channel.id },
       });
     };
-    const onNewChat = () => {
-      // console.log('press')
-      // navigate to a screen for this channel
-      navigation.navigate("Contacts");
-    };
     const publicFilters = {
-      // type: { $ne: "messaging" },
+      type: { $ne: "messaging" },
       members: { $in: [userId] },
     };
     return (
@@ -42,51 +36,45 @@ const AllChats = (props) => {
             // backgroundColor: 'rgba(90,154,230,1)',
             // borderBottomWidth: 2,
             // borderBottomColor: 'lightgray',
-            backgroundColor: 'white',
+  
           }}>
-            <Icon
-              containerStyle={{
-                width: 60,
-                height: 40,
-                alignContent: 'center',
-                justifyContent: 'center',
+          <Icon
+            containerStyle={{
+              width: 60,
+              height: 40,
+              alignContent: 'center',
+              justifyContent: 'center',
+              marginRight: 0,
+            }}
+            raised
+            reverse
+            solid
+            size={30}
+            name='chevrons-right'
+            type='feather'
+            color='#4c8bf5'
+            // color='blue'
+            onPress={() => navigation.openDrawer()}
   
+          />
+          <Text style={{ fontWeight: '700', fontSize: 18, marginHorizontal: 33, }}>Favourite Chats</Text>
+          <Button
+              raised
+              //  onPress={}
+              title="edit"
+              icon={{
+                name: 'edit',
+                type: 'material-community-icons',
+                size: 20,
+                color: '#4c8bf5',
               }}
-              raised
-              reverse
-              solid
-              size={30}
-              name='chevrons-right'
-              type='feather'
-              color='#4c8bf5'
-              // color='blue'
-              onPress={() => navigation.openDrawer()}
-  
-            />
-            <Text style={{ 
-                fontWeight: '700',
-                fontSize: 18, 
-                marginHorizontal: 60,
-                }}>All Chats</Text>
-
-            <Button
-              raised
-              // reverse
-              onPress={onNewChat}
-              title="+ Chat"
-              // icon={{
-              //   name: 'dingding',
-              //   type: 'ant-design',
-              //   size: 20,
-              //   color: 'rgba(90, 154, 230, 1)',
-              // }}
-              iconContainerStyle={{ marginRight: 0 }}
+              iconContainerStyle={{ marginRight: 10 }}
               titleStyle={{ fontWeight: '600', color: '#4c8bf5' }}
               buttonStyle={{
-                backgroundColor: 'white',
+                backgroundColor: 'transparent',
                 borderColor: 'gray',
-                // borderWidth: 0,
-                // borderRadius: 30,
+                borderWidth: 0,
+                borderRadius: 30,
                 // width: 10,
                 height: 45,
                 // shadowRadius: 1,
@@ -101,14 +89,14 @@ const AllChats = (props) => {
                 marginVertical: 5,
                 // marginBottom: 15,
                 borderRadius: 30,
-                // marginStart: 60,
+                // marginStart: 80,
               }}
             />
           </View>
         </SafeAreaView>
   
-        <ChannelList onSelect={onChannelSelect} filters={publicFilters} />
+        {/* <ChannelList onSelect={onChannelSelect} filters={publicFilters} /> */}
       </OverlayProvider>
     )
   }
-  export default AllChats;
+export default FavouritesScreen;

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "199844830206",
+    "project_id": "txtend-2fdfe",
+    "storage_bucket": "txtend-2fdfe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199844830206:android:5bccfb00a40a49a90afeaf",
+        "android_client_info": {
+          "package_name": "com.interesingTechnologies.txtend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199844830206-vj6el785f3gicj0s9icmkj2fk0hmgb8k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-h1b0Y4PNJTU0ST2fQEpsIApdEVMWQe4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199844830206-vj6el785f3gicj0s9icmkj2fk0hmgb8k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

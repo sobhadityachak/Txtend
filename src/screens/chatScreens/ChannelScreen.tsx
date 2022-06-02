@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { Channel, MessageList, MessageInput, ChannelAvatar, useChatContext } from "stream-chat-expo";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -9,7 +9,8 @@ import { Icon } from "@rneui/themed";
 const ChannelScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const channel = route?.params?.channel;
+  const [channel, setChannel] = useState(null);
+  const channelObject = route?.params?.channel;
   //param is null initaially thats why we have to access
   //it safely using '?'
 
@@ -21,12 +22,30 @@ const ChannelScreen = () => {
   //   return () => {
   //   }
   // }, [])
+  const { client } = useChatContext();
+  const { channelId } = route?.params || {};
 
-  if (!channel) {
+  useEffect(() => {
+    const fetchChannel = async () => {
+      setChannel(null);
+      console.log("fetching channel", channelId);
+      const channels = await client.queryChannels({ id: { $eq: channelId } });
+      if (channels.length > 0) {
+        console.log("updating channel state");
+        setChannel(channels[0]);
+      } else {
+        console.log("No channels found");
+      }
+    };
+
+    fetchChannel();
+  }, [channelId]);
+
+  if (!channelId) {
     return (
       <View style={styles.errorContainer}>
         <Text style={styles.errorText}>
-          Go back to All Chats and Start texting
+          Opps! ..Loading! please go back
         </Text>
       </View>
     );
@@ -35,7 +54,7 @@ const ChannelScreen = () => {
   return (
     <SafeAreaView>
 
-      <Channel channel={channel} key={channel.data.id}  >
+      <Channel channel={channelId} key={channelId.data.id}  >
         {/* <ChannelHeader /> */}
         <View style={{
           flexDirection: "row",
@@ -46,11 +65,11 @@ const ChannelScreen = () => {
           <HamburgerMenu navigation={navigation} />
 
           <MembersIcon
-            cnl={channel} route={route} navigation={navigation} />
+            cnl={channelId} route={route} navigation={navigation} />
 
           {/* useChatContext to show channel memberCount and active members */}
 
-          <Text>{channel?._user?.name}</Text>
+          <Text>{channelId?.data?.name}</Text>
         </View>
 
         {/* <ChannelPreviewTitle channel={channel} displayName={"df"}/> */}

@@ -28,6 +28,7 @@ import ConfirmEmailScreen from "../screens/authentication/ConfirmPhoneScreen";
 import AppLoading from "expo-app-loading";
 import FinalSignUpScreen from "../screens/authentication/finalSignUp";
 
+
 export default function Navigation({
   colorScheme,
 }: {
@@ -48,6 +49,17 @@ export default function Navigation({
  * https://reactnavigation.org/docs/modal
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+// notifee.onBackgroundEvent(async ({ detail, type }) => {
+//   if (type === EventType.PRESS) {
+//     // user press on notification detected while app was on background on Android
+//     const channelId = detail.notification?.data?.channel_id;
+//     if (channelId) {
+//        navigationContainerRef.current?.navigate('ChannelScreen', { channelId });
+//     }
+//     await Promise.resolve();
+//   }
+// });
 
 function RootNavigator() {
   const { userId } = useAuthContext();
@@ -76,6 +88,23 @@ function RootNavigator() {
         checkUser();
       }
     };
+
+    // if(authUser){
+    //         //for background notification
+    //         messaging().onNotificationOpenedApp((remoteMessage)=>{
+    //           console.log(
+    //             "Notification caused app to open from background state:",
+    //             remoteMessage
+    //           );
+    //           const channel = JSON.parse(remoteMessage?.data?.channel || "");
+    //           console.log('This message belongs to channel with id - ', channel.id);
+    //           navigation.navigate("ChannelScreen", {
+    //             screen: "Chat",
+    //             params: { channelId: channel.id },
+    //           });
+    //         });
+    // }
+
 
     Hub.listen('auth', listener);
     return () => Hub.remove('auth', listener);
