@@ -64,7 +64,7 @@ function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <AuthContext client={client} value={{userId, setUserId}}>
+        <AuthContext client={client} >
           <OverlayProvider >
             <Chat client={client}>
               <Navigation colorScheme={"light"} />

@@ -25,8 +25,7 @@
     "android": {
       "permissions": [],
       "package": "com.interestingTechnologies.txtend",
-      "versionCode": 5,
-      "googleServiceFiles": "./google-services.json"
+      "versionCode": 5
   },
   "web": {
     "favicon": "./assets/images/logo1.png"

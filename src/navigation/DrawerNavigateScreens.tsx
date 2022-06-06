@@ -32,7 +32,7 @@ import AllChats from "../screens/channels/AllChatsScreen";
 import Dms from "../screens/channels/DMchatsScreen";
 import FavouritesScreen from "../screens/channels/FavouritesScreen";
 // import { Auth } from "aws-amplify";
-import messaging from '@react-native-firebase/messaging'
+// import messaging from '@react-native-firebase/messaging'
 
 const Drawer = createDrawerNavigator();
 // const CustomHead (...props) => {
@@ -205,37 +205,37 @@ const CustomDrawerContent = (props) => {
     console.log("user _log out")
     // navigation.navigate('signUp');
   };
-  useEffect(() => {
-    //         //for background notification
-    messaging().onNotificationOpenedApp((remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage
-      );
-      const channel = JSON.parse(remoteMessage?.data?.channel || "");
-      console.log('This message belongs to channel with id - ', channel.id);
-      navigation.navigate("ChannelScreen", {
-        screen: "Chat",
-        params: { channelId: channel.id },
-      });
-    });
-    // for notification when app is in quit state
-    messaging()
-      .getInitialNotification()
-      .then((remoteMessage) => {
-        if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quite state:",
-            remoteMessage
-          );
-          const channel = JSON.parse(remoteMessage?.data?.channel || "");
+  // useEffect(() => {
+  //   //         //for background notification
+  //   messaging().onNotificationOpenedApp((remoteMessage) => {
+  //     console.log(
+  //       "Notification caused app to open from background state:",
+  //       remoteMessage
+  //     );
+  //     const channel = JSON.parse(remoteMessage?.data?.channel || "");
+  //     console.log('This message belongs to channel with id - ', channel.id);
+  //     navigation.navigate("ChannelScreen", {
+  //       screen: "Chat",
+  //       params: { channelId: channel.id },
+  //     });
+  //   });
+  //   // for notification when app is in quit state
+  //   messaging()
+  //     .getInitialNotification()
+  //     .then((remoteMessage) => {
+  //       if (remoteMessage) {
+  //         console.log(
+  //           "Notification caused app to open from quite state:",
+  //           remoteMessage
+  //         );
+  //         const channel = JSON.parse(remoteMessage?.data?.channel || "");
 
-          console.log("This message belongs to channel with id - ", channel.id);
+  //         console.log("This message belongs to channel with id - ", channel.id);
 
-          navigation.navigate("Channel", { channelId: channel.id });
-        }
-      });
-  }, [])
+  //         navigation.navigate("Channel", { channelId: channel.id });
+  //       }
+  //     });
+  // }, [])
 
 
   return (

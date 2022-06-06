@@ -1,0 +1,29 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-txtendindia-staging-82604-authRole",
+      "UnauthRoleArn": "arn:aws:iam::066613758898:role/amplify-txtendindia-staging-82604-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::066613758898:role/amplify-txtendindia-staging-82604-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-txtendindia-staging-82604-deployment",
+      "UnauthRoleName": "amplify-txtendindia-staging-82604-unauthRole",
+      "StackName": "amplify-txtendindia-staging-82604",
+      "StackId": "arn:aws:cloudformation:ap-south-1:066613758898:stack/amplify-txtendindia-staging-82604/a5283e80-e24d-11ec-ae41-0a47e2ce03be",
+      "AmplifyAppId": "d2nq6f7p2ikfdc"
+    },
+    "categories": {
+      "auth": {
+        "txtendindia": {}
+      },
+      "function": {
+        "getStreamToken": {
+          "discordStreamKey": "d2sx6cyu72g8",
+          "discordStreamSecret": "ahrcgm2urv4ndh5t7s267wp9bh6yzvvsnajm323299uftkeevtnfy8qvqyq8223e",
+          "secretsPathAmplifyAppId": "d2nq6f7p2ikfdc",
+          "deploymentBucketName": "amplify-txtendindia-staging-82604-deployment",
+          "s3Key": "amplify-builds/getStreamToken-4637726c75675a41344a-build.zip"
+        }
+      }
+    }
+  }
+}

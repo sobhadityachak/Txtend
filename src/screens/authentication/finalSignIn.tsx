@@ -24,9 +24,11 @@ const FinalSignInScreen = () => {
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
-  const route = useRoute();
+  const [loadingOTP, setLoadingOTP] = useState(false);
+  const [sendingOTP, setSendingOTP] = useState(false);
+
   const [usrName, setusrName] = useState('');
-  const [passwrd, setpassWrd] = useState('');
+  // const [passwrd, setpassWrd] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [code, onChangeCode] = useState('');
 
@@ -42,11 +44,11 @@ const FinalSignInScreen = () => {
   } = useForm();
 
   const onSendOtpPressed = async data => {
-    if (loading) {
+    if (sendingOTP) {
       return;
     }
 
-    setLoading(true);
+    setSendingOTP(true);
     try {
       await Auth.forgotPassword(data.username);
       // navigation.push('ConfirmPhone')
@@ -55,17 +57,17 @@ const FinalSignInScreen = () => {
     } catch (e) {
       Alert.alert('Oops', e.message);
     }
-    setLoading(!loading);
+    setSendingOTP(!sendingOTP);
     setusrName(data.username)
     setModalVisible(true)
   };
 
   const onVerifyPressed = async () => {
-    if (loading) {
+    if (loadingOTP) {
       return;
     }
     const password = passwordGenerator().toString();
-    // console.log(password, usrName, code);
+    console.log(password, usrName, code);
 
     try {
       await Auth.forgotPasswordSubmit(usrName, code, password);
@@ -82,7 +84,7 @@ const FinalSignInScreen = () => {
       Alert.alert('Oops', error.message)
     }
     finally{
-      setLoading(!loading);
+      setLoadingOTP(!loadingOTP);
     }
   };
 
@@ -135,7 +137,7 @@ const FinalSignInScreen = () => {
 
                   />
                   <CustomButton
-                    text={loading ? 'Verifing OTP...' : 'Verify OTP'}
+                    text={loadingOTP ? 'Verifing OTP...' : 'Verify OTP'}
                     onPress={onVerifyPressed}
                     type="SECONDARY" bgColor={undefined} fgColor={undefined} />
                   {/* <Pressable
@@ -179,7 +181,7 @@ const FinalSignInScreen = () => {
             }} secureTextEntry={undefined} />
 
           <CustomButton
-            text={loading ? 'Sending OTP...' : 'Send OTP'}
+            text={sendingOTP ? 'Sending OTP...' : 'Send OTP'}
             onPress={handleSubmit(onSendOtpPressed)}
             bgColor={undefined} fgColor={undefined} />
 

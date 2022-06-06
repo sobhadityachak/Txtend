@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "txtendindia",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/home/sobhaditya/Desktop/disrupt-msg/amplify/backend/api/txtendindia/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authtxtendindia"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}

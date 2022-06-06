@@ -1,0 +1,17 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "discordStreamKey",
+      "environmentVariableName": "DISCORD_STREAM_KEY"
+    },
+    {
+      "cloudFormationParameterName": "discordStreamSecret",
+      "environmentVariableName": "DISCORD_STREAM_SECRET"
+    }
+  ],
+  "secretNames": [
+    "DISCORD_SECRET",
+    "DISCORD_KEY"
+  ]
+}

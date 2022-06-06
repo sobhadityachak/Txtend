@@ -82,27 +82,10 @@ const FinalSignUpScreen = () => {
   //   navigation.replace('ForgotPassword');
   // };
 
-  const onSignUpPress = () => {
-    
+  const onSignInPress = () => {
     navigation.replace('SignIn');
   };
  
-
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 0.8,
-    });
-
-    // console.log(result);
-
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
-  };
 
 
 
@@ -112,70 +95,26 @@ const FinalSignUpScreen = () => {
 
         <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root}>
           <View><Text style={{ color: '#3B71F3', fontSize: 22, fontWeight: 'bold', marginTop: -50, }}>Set up your Profile</Text></View>
-          <TouchableOpacity onPress={pickImage} >
-          <View style={imageUploaderStyles.container}>
-            {
-              image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-            }
-
-            <View style={imageUploaderStyles.uploadBtnContainer}>
-              <View style={imageUploaderStyles.uploadBtn} >
-                <Text>{image ? 'Edit' : 'Upload'} Image</Text>
-                <AntDesign name="camera" size={20} color="black" />
-                </View>
-              
-            </View>
-            </View>
-            </TouchableOpacity>
 
           <View style={styles.root1}>
             <CustomInput
-              name="name"
-              control={control}
-              placeholder="Name"
-              rules={{
-                required: 'Name is required',
-                minLength: {
-                  value: 3,
-                  message: 'Name should be at least 3 characters long',
-                },
-                maxLength: {
-                  value: 24,
-                  message: 'Name should be max 24 characters long',
-                },
-              }} secureTextEntry={undefined} />
-            <CustomInput
               name="username"
               control={control}
-              placeholder="Phone number eg.. +919876543210"
+              placeholder="Verify Phone number"
               rules={{
                 required: 'Phone Number with county code is required for password verification',
                 length: {
 
                 },
                 minLength: {
-                  value: 12,
-                  message: 'Username should be at least 12 characters long',
+                  value: 10,
+                  message: 'phone number should be at least 10 characters long',
                 },
                 maxLength: {
-                  value: 15,
-                  message: 'Username should be max 15 characters long',
+                  value: 10,
+                  message: 'phone number should be max 10 characters long',
                 },
               }} secureTextEntry={undefined} />
-
-            {/*<CustomInput
-            name="password"
-            placeholder="Password with numeric value"
-            secureTextEntry
-            control={control}
-            rules={{
-              required: 'Password is required',
-              minLength: {
-                value: 6,
-                message: 'Password should be minimum 6 characters long',
-              },
-            }}
-          />*/}
 
             <CustomButton
               text={loading ? 'Loading...' : 'All set! Register'}
@@ -190,7 +129,7 @@ const FinalSignUpScreen = () => {
 
             <CustomButton
               text="If you have an account, Sign In"
-              onPress={onSignUpPress}
+              onPress={onSignInPress}
               type="TERTIARY" bgColor={undefined} fgColor={undefined} />
           </View>
           <Image
