@@ -48,7 +48,7 @@ const NewChannelScreen = () => {
       )
     }
     const channel = client.channel("team", uuidv4(), { name, image: image });
-    await channel.create();
+    await channel.watch();
     await channel.addMembers([userId]);
     setName('');
     setImage(null)

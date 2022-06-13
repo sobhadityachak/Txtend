@@ -22,7 +22,7 @@ import DrawerNavigator from "./DrawerNavigateScreens";
 import {Auth, Hub} from 'aws-amplify';
 
 import FinalSignInScreen from "../screens/authentication/finalSignIn";
-import ConfirmEmailScreen from "../screens/authentication/ConfirmPhoneScreen";
+import NewSignUpScreen from "../screens/authentication/SignUpScreen";
 // import ForgotPasswordScreen from "../screens/authentication/ForgetPasswordScreen";
 // import NewPasswordScreen from "../screens/authentication/NewPasswordScreen";
 import AppLoading from "expo-app-loading";
@@ -128,13 +128,13 @@ function RootNavigator() {
     //   ) : ( */}
 
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {user ? (
+        {(userId && user)? (
           <Stack.Screen name="Root" component={DrawerNavigator} />
         ) : (
           <>
             <Stack.Screen name="SignUp" component={FinalSignUpScreen} />
             <Stack.Screen name="SignIn" component={FinalSignInScreen} />
-            <Stack.Screen name="ConfirmPhone" component={ConfirmEmailScreen} />
+            <Stack.Screen name="Profile" component={NewSignUpScreen} />
             {/* <Stack.Screen
               name="ForgotPassword"
               component={ForgotPasswordScreen}

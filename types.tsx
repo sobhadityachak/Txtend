@@ -23,7 +23,7 @@ export type RootStackParamList = {
   SignUpScreen: undefined;
   SignUp : undefined;
   SignIn: undefined;
-  ConfirmPhone: undefined;
+  Profile: undefined;
   ForgotPassword: undefined;
   NewPassword: undefined;
   

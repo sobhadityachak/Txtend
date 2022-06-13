@@ -10,6 +10,7 @@ import {
   Alert,
   ImageBackground,
   TouchableOpacity,
+  Modal,
 
 
 } from 'react-native';
@@ -24,15 +25,22 @@ import { useForm, Controller } from 'react-hook-form';
 import { Auth } from 'aws-amplify';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-const FinalSignUpScreen = () => {
+function passwordGenerator() {
+  return Math.random().toString(36).slice(2);
+}
+
+const NewSignUpScreen = () => {
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState(null);
+  const [loadingOTP, setLoadingOTP] = useState(false);
+  const [sendingOTP, setSendingOTP] = useState(false);
 
-  function passwordGenerator (max:number =99999999, min:number=10000000){
-    return Math.floor(Math.random()*(max-min)+ min);
-  }
+  const [usrName, setusrName] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [code, onChangeCode] = useState('');
+  const [password, setPassword] = useState('');
+
 
   const {
     control,
@@ -42,13 +50,13 @@ const FinalSignUpScreen = () => {
   } = useForm();
 
   const onRegisterPressed = async data => {
-    const { username, name } = data;
-    const password = passwordGenerator().toString();
+    const { username } = data;
+    const password = passwordGenerator();
     console.log(password);
 
     try {
       await Auth.signUp({
-        username,
+        username: '+91' + username,
         password,
         // attributes: {
         //   picture: image,
@@ -56,36 +64,80 @@ const FinalSignUpScreen = () => {
         // },
       });
 
-      navigation.replace('ConfirmPhone', { username, password });
+      // navigation.replace('ConfirmPhone', { username, password });
+      setModalVisible(true);
+      setusrName(username);
     } catch (e) {
       Alert.alert('Oops', e.message);
     }
+    
   };
 
-  
-  // const onSignInPressed = async data => {
-  //   if (loading) {
+
+  // const onSendOtpPressed = async data => {
+  //   if (sendingOTP) {
   //     return;
   //   }
 
-  //   setLoading(true);
+  //   setSendingOTP(true);
   //   try {
-  //     const response = await Auth.signIn(data.username, data.password);
-  //     console.log(response);
+  //     await Auth.forgotPassword(data.username);
+  //     // navigation.push('ConfirmPhone')
+  //     //   const response = await Auth.signIn(data.username, data.password);
+  //     //   console.log(response);
   //   } catch (e) {
   //     Alert.alert('Oops', e.message);
   //   }
-  //   setLoading(false);
+  //   setSendingOTP(!sendingOTP);
+  //   setusrName(data.username)
+  //   setModalVisible(true)
   // };
 
-  // const onForgotPasswordPressed = () => {
-  //   navigation.replace('ForgotPassword');
-  // };
+  const onVerifyPressed = async () => {
+    if (loadingOTP) {
+      return;
+    }
+    
+    try {
+      await Auth.confirmSignUp(usrName, code);
 
-  const onSignInPress = () => {
-    navigation.replace('SignIn');
+    Alert.alert("verfied","Congratulations Your are all Set!"); 
+    } catch (e) {
+      Alert.alert('Oops', e.message);
+    }
+
+    try {
+      await Auth.signIn(usrName, password);
+      setModalVisible(false);
+      navigation.goBack();
+
+    } catch (error) {
+      Alert.alert('Oops', error.message)
+    }
+    // finally{
+    //   setLoadingOTP(!loadingOTP);
+    // }
   };
- 
+
+  const onResendPress = async () => {
+    if (loading) {
+      return;
+    }
+    try {
+      await Auth.resendSignUp(usrName);
+      Alert.alert('Success', 'Code was resent to your phone');
+    } catch (e) {
+      Alert.alert('Oops', e.message);
+    }
+    finally{
+      setLoading(!loading);
+    }
+  };
+  
+  const onSignInPress = () => {
+    navigation.navigate('SignIn');
+  };
+
 
 
 
@@ -94,13 +146,58 @@ const FinalSignUpScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
 
         <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root}>
-          <View><Text style={{ color: '#3B71F3', fontSize: 22, fontWeight: 'bold', marginTop: -50, }}>Set up your Profile</Text></View>
+          <View><Text style={{ color: '#3B71F3', fontSize: 22, fontWeight: 'bold', marginTop: -50, }}>Confirm your Phone number</Text></View>
+          <View style={styles.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                // Alert.alert("resend OTP.");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <TextInput
 
+                    style={styles.input}
+                    onChangeText={onChangeCode}
+                    value={code}
+                    placeholder="enter received OTP"
+                    keyboardType="numeric"
+
+                  />
+                  <CustomButton
+                    text={loadingOTP ? 'Verifing OTP...' : 'Verify OTP'}
+                    onPress={onVerifyPressed}
+                    type="SECONDARY" bgColor={undefined} fgColor={undefined} />
+                  {/* <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>Hide Modal</Text>
+                  </Pressable> */}
+                  <CustomButton
+                    text={loading ? 'Resending OTP...' : 'Resend OTP'}
+                    onPress={onResendPress}
+                    type="SECONDARY" bgColor={undefined} fgColor={undefined} />
+
+                </View>
+              </View>
+            </Modal>
+            {/* <Pressable
+              style={[styles.button, styles.buttonOpen]}
+              onPress={() => setModalVisible(true)}
+            >
+              <Text style={styles.textStyle}>Show Modal</Text>
+            </Pressable> */}
+          </View>
           <View style={styles.root1}>
             <CustomInput
               name="username"
               control={control}
-              placeholder="Verify Phone number"
+              placeholder="Enter Phone number"
               rules={{
                 required: 'Phone Number with county code is required for password verification',
                 length: {
@@ -117,7 +214,7 @@ const FinalSignUpScreen = () => {
               }} secureTextEntry={undefined} />
 
             <CustomButton
-              text={loading ? 'Loading...' : 'All set! Register'}
+              text={loading ? 'Sending OTP...' : 'Send OTP!'}
               onPress={handleSubmit(onRegisterPressed)} bgColor={undefined} fgColor={undefined} />
 
             {/* <CustomButton
@@ -156,6 +253,22 @@ const styles = StyleSheet.create({
     //height:820,
     flex: 1,
   },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: '70%',
+  },
   logo: {
     width: '40%',
     maxWidth: 300,
@@ -165,7 +278,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     display: 'flex',
   },
-
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    
+  },
   root1: {
     backgroundColor: 'rgba(255,255 , 255, 0.6)',
     marginTop: -40,
@@ -174,37 +293,42 @@ const styles = StyleSheet.create({
     padding: 45,
     borderRadius: 35,
     paddingBottom: 70,
-
-
-
   },
+  input: {
+    height: 40,
+    width: '70%',
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 60,
 
-});
-const imageUploaderStyles = StyleSheet.create({
-  container: {
-    elevation: 2,
-    height: 100,
-    width: 100,
-    backgroundColor: '#efefef',
-    position: 'relative',
-    borderRadius: 999,
-    overflow: 'hidden',
-    marginTop: 50,
-  },
-  uploadBtnContainer: {
-    opacity: 0.7,
-    position: "absolute",
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'lightgrey',
-    width: '100%',
-    height: '45%',
-  },
-  uploadBtn: {
-    display: 'flex',
-    alignItems: "center",
-    justifyContent: 'center'
   }
-})
+});
+// const imageUploaderStyles = StyleSheet.create({
+//   container: {
+//     elevation: 2,
+//     height: 100,
+//     width: 100,
+//     backgroundColor: '#efefef',
+//     position: 'relative',
+//     borderRadius: 999,
+//     overflow: 'hidden',
+//     marginTop: 50,
+//   },
+//   uploadBtnContainer: {
+//     opacity: 0.7,
+//     position: "absolute",
+//     right: 0,
+//     bottom: 0,
+//     backgroundColor: 'lightgrey',
+//     width: '100%',
+//     height: '45%',
+//   },
+//   uploadBtn: {
+//     display: 'flex',
+//     alignItems: "center",
+//     justifyContent: 'center'
+//   }
+// })
 
-export default FinalSignUpScreen;
+export default NewSignUpScreen;

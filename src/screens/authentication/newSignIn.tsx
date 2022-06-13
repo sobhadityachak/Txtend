@@ -20,7 +20,11 @@ import { useForm, Controller } from 'react-hook-form';
 import { Auth } from 'aws-amplify';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-const FinalSignInScreen = () => {
+function passwordGenerator() {
+    return Math.random().toString(36).slice(2);
+  }
+
+const NewSignInScreen = () => {
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
@@ -31,10 +35,6 @@ const FinalSignInScreen = () => {
   // const [passwrd, setpassWrd] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [code, onChangeCode] = useState('');
-
-  function passwordGenerator(max: number = 99999999, min: number = 10000000) {
-    return Math.floor(Math.random() * (max - min) + min);
-  }
 
   const {
     control,
@@ -66,8 +66,7 @@ const FinalSignInScreen = () => {
     if (loadingOTP) {
       return;
     }
-    const password = passwordGenerator().toString();
-    console.log(password, usrName, code);
+    const password = passwordGenerator();
 
     try {
       await Auth.forgotPasswordSubmit(usrName, code, password);
@@ -78,7 +77,7 @@ const FinalSignInScreen = () => {
       // return;
     }
     try {
-      // await Auth.signIn(usrName, password);
+      await Auth.signIn(usrName, password);
       navigation.navigate('Profile');
     } catch (error) {
       Alert.alert('Oops', error.message)
@@ -103,7 +102,7 @@ const FinalSignInScreen = () => {
     }
   };
   const onSignUpPress = () => {
-    navigation.replace('SignUp');
+    navigation.navigate('SignUp');
   };
 
   return (
@@ -263,4 +262,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FinalSignInScreen;
+export default NewSignInScreen;
