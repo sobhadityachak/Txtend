@@ -4,7 +4,7 @@ import React from "react";
 import { OverlayProvider, useChatContext } from "stream-chat-expo";
 import { FlatList } from "react-native-gesture-handler";
 import UserListItem from "../../components/UserListItem";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext1";
 import { useNavigation } from "@react-navigation/native";
 import { Icon, Button } from "@rneui/base";
 
@@ -27,14 +27,17 @@ const UserListScreen = () => {
     const channel = client.channel("messaging", {
       members: [userId, user.id],
     });
-    await channel.create();
+    await channel.watch();
 
-    navigation.navigate("ChannelScreen", { channel});
+    navigation.navigate("ChannelScreen", {
+      screen: "Chat",
+      params: { channel },
+    });
   };
 
   return (
     <OverlayProvider >
-    <SafeAreaView style={styles.container}>
+    {/* <SafeAreaView style={styles.container}>
     <View style={{
       // color: 'white',
       // opacity: 1,
@@ -50,7 +53,24 @@ const UserListScreen = () => {
       // borderBottomColor: 'lightgray',
       borderRadius: 30,
 
-    }}>
+    }}> */}
+      <SafeAreaView style={{ marginTop: 20, }}>
+          <View style={{
+            // color: 'white',
+            // opacity: 1,
+            flexDirection: "row",
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            // margin: 10,
+            height: 90,
+            alignContent: 'space-between',
+            // borderBottomRightRadius: 30,
+            backgroundColor: 'transparent',
+            // borderBottomWidth: 50,
+            // borderBottomColor: 'lightgray',
+            // borderBottomEndRadius: -320,
+          
+          }}>
       <Icon
         containerStyle={{
           width: 60,

@@ -4,7 +4,7 @@ import React from "react";
 import { Text, View, SafeAreaView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { OverlayProvider, ChannelList, ChannelListMessenger } from "stream-chat-expo";
-import { useAuthContext, useUserContext } from "../../contexts/AuthContext";
+import { useAuthContext, useUserContext } from "../../contexts/AuthContext1";
 
 const GroupChats = (props) => {
 
@@ -27,7 +27,7 @@ const GroupChats = (props) => {
     const onChannelCreate = () => {
       // console.log('press')
       // navigate to a screen for this channel
-      navigation.jumpTo("NewChannel");
+      navigation.navigate("NewChannel");
     };
     const publicFilters = {
       type: { $ne: "messaging" },

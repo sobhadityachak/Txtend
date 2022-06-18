@@ -3,7 +3,7 @@ import { Icon, Button } from "@rneui/base";
 import React from "react";
 import { SafeAreaView, View, Text } from "react-native";
 import { OverlayProvider, ChannelList } from "stream-chat-expo";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext1";
 
 const AllChats = (props) => {
     const { userId } = useAuthContext();
@@ -20,7 +20,7 @@ const AllChats = (props) => {
     const onNewChat = () => {
       // console.log('press')
       // navigate to a screen for this channel
-      navigation.navigate("Contacts");
+      navigation.navigate("qrScanner");
     };
     const publicFilters = {
       // type: { $ne: "messaging" },
@@ -28,7 +28,7 @@ const AllChats = (props) => {
     };
     return (
       <OverlayProvider >
-        <SafeAreaView style={{ height: 100, }}>
+        <SafeAreaView style={{ marginTop: 20, }}>
           <View style={{
             // color: 'white',
             // opacity: 1,
@@ -39,10 +39,11 @@ const AllChats = (props) => {
             height: 90,
             alignContent: 'space-between',
             // borderBottomRightRadius: 30,
-            // backgroundColor: 'rgba(90,154,230,1)',
-            // borderBottomWidth: 2,
+            backgroundColor: 'transparent',
+            // borderBottomWidth: 50,
             // borderBottomColor: 'lightgray',
-            backgroundColor: 'white',
+            // borderBottomEndRadius: -320,
+          
           }}>
             <Icon
               containerStyle={{

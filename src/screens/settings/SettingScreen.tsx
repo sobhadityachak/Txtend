@@ -56,163 +56,163 @@ const SettingScreen = () => {
 
 
 
-    
-      <SafeAreaView style={{
-        //   marginTop: 30,
-        //   backgroundColor: "#365",
-    //   flex: 1,
+
+    <SafeAreaView style={{
+      //   marginTop: 30,
+      //   backgroundColor: "#365",
+      //   flex: 1,
       paddingTop: 35,
 
-       }} >
-           <View style={{
-          // color: 'white',
-          // opacity: 1,
-          flexDirection: "row",
-          justifyContent: 'center',
-          alignItems: 'center',
-          // margin: 10,
-          height: 90,
-          alignContent: 'space-between',
-          // borderBottomRightRadius: 30,
-          backgroundColor: 'white',
-          // borderBottomWidth: 50,
-          // borderBottomColor: 'lightgray',
-          // borderBottomEndRadius: -320,
-        
-        }}>
-          <Icon
-            containerStyle={{
-              width: 60,
-              height: 40,
-              alignContent: 'center',
-              justifyContent: 'center',
+    }} >
+      <View style={{
+        // color: 'white',
+        // opacity: 1,
+        flexDirection: "row",
+        justifyContent: 'center',
+        alignItems: 'center',
+        // margin: 10,
+        height: 90,
+        alignContent: 'space-between',
+        // borderBottomRightRadius: 30,
+        backgroundColor: 'white',
+        // borderBottomWidth: 50,
+        // borderBottomColor: 'lightgray',
+        // borderBottomEndRadius: -320,
 
-            }}
-            raised
-            reverse
-            solid
-            size={30}
-            name='chevrons-right'
-            type='feather'
-            color='#4c8bf5'
-            // color='blue'
-            onPress={() => navigation.openDrawer()}
+      }}>
+        <Icon
+          containerStyle={{
+            width: 60,
+            height: 40,
+            alignContent: 'center',
+            justifyContent: 'center',
 
-          />
-          <Text style={{ fontWeight: '700', fontSize: 18, marginHorizontal: 120, }}>Settings</Text>
-         
-         
-        </View>
-        <ScrollView >
-          <View><Text style={styles.text2}>    My Account</Text></View>
+          }}
+          raised
+          reverse
+          solid
+          size={30}
+          name='chevrons-right'
+          type='feather'
+          color='#4c8bf5'
+          // color='blue'
+          onPress={() => navigation.openDrawer()}
 
-          <View style={styles.container}>
+        />
+        <Text style={{ fontWeight: '700', fontSize: 18, marginLeft: 150, }}>Settings</Text>
 
-            <TouchableOpacity>
-              <View>
-                {/* <Image style={styles.text6}
+
+      </View>
+      <ScrollView >
+        <View><Text style={styles.text2}>    My Account</Text></View>
+
+        <View style={styles.container}>
+
+          <TouchableOpacity>
+            <View>
+              {/* <Image style={styles.text6}
                   source={require('./assets/images/pro.png')}
                 /> */}
-              </View>
-            </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
 
-            <TouchableOpacity onPress={_name}>
-              <Text style={styles.text3}>Name</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_username}>
-              <Text style={styles.text}>Username</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_phone}>
-              <Text style={styles.text}>Phone</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_email}>
-              <Text style={styles.text}>Email</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_aboutme}>
-              <Text style={styles.text}>About Me</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_tellafriend}>
-              <Text style={styles.text4}>Tell a Friend</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity onPress={_name}>
+            <Text style={styles.text3}>Name</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_username}>
+            <Text style={styles.text}>Username</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_phone}>
+            <Text style={styles.text}>Phone</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_email}>
+            <Text style={styles.text}>Email</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_aboutme}>
+            <Text style={styles.text}>About Me</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_tellafriend}>
+            <Text style={styles.text4}>Tell a Friend</Text>
+          </TouchableOpacity>
+        </View>
 
-          <View><Text style={styles.text2}>    Chat</Text></View>
-          <View style={styles.container}>
-            <TouchableOpacity onPress={_chatwall}>
-              <Text style={styles.text3}>Chat Wallpaper</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_blocked}>
-              <Text style={styles.text}>Blocked Contacts</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_deleteall}>
-              <Text style={styles.text4}>Delete all Chats</Text>
-            </TouchableOpacity>
-          </View>
+        <View><Text style={styles.text2}>    Chat</Text></View>
+        <View style={styles.container}>
+          <TouchableOpacity onPress={_chatwall}>
+            <Text style={styles.text3}>Chat Wallpaper</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_blocked}>
+            <Text style={styles.text}>Blocked Contacts</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_deleteall}>
+            <Text style={styles.text4}>Delete all Chats</Text>
+          </TouchableOpacity>
+        </View>
 
-          <View><Text style={styles.text2}>    Help</Text></View>
-          <View style={styles.container}>
-            <TouchableOpacity onPress={_suggestions}>
-              <Text style={styles.text3}>Suggestions</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_faq}>
-              <Text style={styles.text}>FAQ</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_privacy}>
-              <Text style={styles.text}>Privacy Policy</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_useragreement}>
-              <Text style={styles.text}>User Agreement</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={_report}>
-              <Text style={styles.text4}>Report a Bug</Text>
-            </TouchableOpacity>
-          </View>
+        <View><Text style={styles.text2}>    Help</Text></View>
+        <View style={styles.container}>
+          <TouchableOpacity onPress={_suggestions}>
+            <Text style={styles.text3}>Suggestions</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_faq}>
+            <Text style={styles.text}>FAQ</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_privacy}>
+            <Text style={styles.text}>Privacy Policy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_useragreement}>
+            <Text style={styles.text}>User Agreement</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={_report}>
+            <Text style={styles.text4}>Report a Bug</Text>
+          </TouchableOpacity>
+        </View>
 
-          <View><Text style={styles.text2}>    What's next?</Text></View>
-          <View style={styles.container}>
-            <TouchableOpacity>
-              <Text style={styles.text3}>Profile Pic Privacy (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.text}>Phone Number Privacy (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.text}>About Section Privacy (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.text}>Status Privacy (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity >
-              <Text style={styles.text}>Media Sent Quality (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.text}>Light/Dark Modes (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.text}>Pinned Messages (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.text}>Archive Chats (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.text}>AR Camera Filters (coming soon)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.text4}>And a lot more... (coming soon)</Text>
-            </TouchableOpacity>
+        <View><Text style={styles.text2}>    What's next?</Text></View>
+        <View style={styles.container}>
+          <TouchableOpacity>
+            <Text style={styles.text3}>Profile Pic Privacy (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.text}>Phone Number Privacy (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.text}>About Section Privacy (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.text}>Status Privacy (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity >
+            <Text style={styles.text}>Media Sent Quality (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.text}>Light/Dark Modes (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.text}>Pinned Messages (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.text}>Archive Chats (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.text}>AR Camera Filters (coming soon)</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.text4}>And a lot more... (coming soon)</Text>
+          </TouchableOpacity>
 
-            <TouchableOpacity>
-              <View>
-                {/* <Image style={styles.text5}
+          <TouchableOpacity>
+            <View>
+              {/* <Image style={styles.text5}
                   source={require('./assets/images/logo.png')}
                 /> */}
-              </View>
-            </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
 
-          </View>
+        </View>
 
-        </ScrollView>
-      </SafeAreaView>
+      </ScrollView>
+    </SafeAreaView>
     // </Provider>
   );
 };

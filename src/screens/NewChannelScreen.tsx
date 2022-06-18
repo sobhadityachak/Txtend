@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import Button from "../components/Button";
 import { useChatContext } from "stream-chat-expo";
 import { v4 as uuidv4 } from "uuid";
-import { useAuthContext } from "../contexts/AuthContext";
+import { useAuthContext } from "../contexts/AuthContext1";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Button, Icon } from "@rneui/themed"
 

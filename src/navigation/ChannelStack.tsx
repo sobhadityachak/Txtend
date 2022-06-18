@@ -8,7 +8,7 @@ import InviteMembersScreen from "../screens/InviteMembersScreen";
 import { AntDesign } from "@expo/vector-icons";
 
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { useAuthContext } from "../contexts/AuthContext";
+import { useAuthContext } from "../contexts/AuthContext1";
 import { ChannelAvatar, useChatContext } from "stream-chat-expo";
 import { FAB, Button, Icon } from "@rneui/themed"
 import QrcodeScanner from "../screens/barcode/qrcodeScanner";

@@ -10,7 +10,7 @@ import Navigation from "./src/navigation";
 
 import { StreamChat } from "stream-chat";
 import { OverlayProvider, Chat, Theme, DeepPartial } from "stream-chat-expo";
-import AuthContext from "./src/contexts/AuthContext";
+import AuthContext from "./src/contexts/AuthContext1";
 // import { StreamColors } from "./src/constants/Colors";
 import React from "react";
 import { Amplify, } from "aws-amplify";

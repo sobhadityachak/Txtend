@@ -31,6 +31,7 @@ import QrCodeGenerator from "../screens/barcode/qrcodeGenerator";
 import AllChats from "../screens/channels/AllChatsScreen";
 import Dms from "../screens/channels/DMchatsScreen";
 import FavouritesScreen from "../screens/channels/FavouritesScreen";
+import qrCodeScanner from "../screens/barcode/qrcodeScanner";
 // import { Auth } from "aws-amplify";
 // import messaging from '@react-native-firebase/messaging'
 
@@ -148,36 +149,40 @@ const DrawerNavigator = () => {
         name="qrGenerator"
         component={QrCodeGenerator}
       />
+      <Drawer.Screen
+      name="qrScanner"
+      component={qrCodeScanner}
+      />
     </Drawer.Navigator>
 
   );
 };
 
 const CustomProfile = () => {
-  const [userName, setUserName] = useState('');
+  // const [userName, setUserName] = useState('');
   // const [picture,setUserPicture]  = useState('');
-  const [number, setUserNumber] = useState('');
+  // const [number, setUserNumber] = useState('');
   // const { picId } = useUserContext();
   // const picture =require('../../assets/images/Logo.png');
   // console.warn(picId);
 
   // route or async
 
-  const getUserData = async () => {
-    const userData = await Auth.currentAuthenticatedUser();
-    const { username, preferred_username } = userData.attributes;
-    setUserName(preferred_username);
-    // setUserPicture(picture);
-    setUserNumber(username);
-  }
+  // const getUserData = async () => {
+  //   const userData = await Auth.currentAuthenticatedUser();
+  //   const { username, preferred_username } = userData.attributes;
+  //   setUserName(preferred_username);
+  //   // setUserPicture(picture);
+  //   setUserNumber(username);
+  // }
 
-  useEffect(() => {
-    getUserData();
+  // useEffect(() => {
+  //   getUserData();
 
-  }, [])
+  // }, [])
 
   return (
-    <View style={styles.profile}>
+    <View >
       {/* <Image
             style={styles.profile}
             source={{uri:picture}}
@@ -186,10 +191,10 @@ const CustomProfile = () => {
             PlaceholderContent={<ActivityIndicator />}
           // style={{styles.profile}} 
            />  */}
-      <Avatar size={50} containerStyle={styles.profile} />
+      <Avatar size={80} containerStyle={styles.profile} />
 
-      <Text style={{ margin: 5 }}>{userName}</Text>
-      <Text style={{ margin: 5 }}>{number}</Text>
+      {/* <Text style={{ margin: 5 }}>{userName}</Text> */}
+      {/* <Text style={{ margin: 5 }}>{number}</Text> */}
 
     </View>
   )
@@ -343,7 +348,7 @@ const CustomDrawerContent = (props) => {
             name='chevron-right'
             type='feather'
             color='black'
-            iconStyle={{ marginLeft: 55, }}
+            iconStyle={{ marginLeft: 57, }}
           // color='blue'
           // onPress={() => navigation.openDrawer()}
           /></TouchableOpacity>
@@ -362,7 +367,7 @@ const CustomDrawerContent = (props) => {
             name='chevron-right'
             type='feather'
             color='black'
-            iconStyle={{ marginLeft: 75, }}
+            iconStyle={{ marginLeft: 55, }}
           // color='blue'
           // onPress={() => navigation.openDrawer()}
           /></TouchableOpacity>
@@ -382,7 +387,7 @@ const CustomDrawerContent = (props) => {
             color='black'
             // color='blue'
             // onPress={() => navigation.openDrawer()}
-            iconStyle={{ marginLeft: 100, }}
+            iconStyle={{ marginLeft: 108, }}
           /></TouchableOpacity>
 
         {/* <Button
@@ -422,9 +427,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   profile: {
-    width: '70%',
-    height: '70%',
-    margin: 10,
+    width: '90%',
+    height: '90%',
+    // margin: 10,
 
   },
   tabs: {

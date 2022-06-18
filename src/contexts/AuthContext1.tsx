@@ -9,7 +9,7 @@ const AuthContext = createContext({
 });
 
 const AuthContextComponent = ({ children, client }) => {
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(undefined);
 
   const connectStreamChatUser = async () => {
     const userData = await Auth.currentAuthenticatedUser();

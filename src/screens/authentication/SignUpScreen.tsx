@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useChatContext } from "stream-chat-expo";
-import { useAuthContext, useUserContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext1";
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
@@ -29,9 +29,9 @@ import { getStreamToken } from "../../graphql/queries";
 const NewSignUpScreen = () => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [setting, setSetting] = useState(false);
   const { setUserId } = useAuthContext();
-  const { setPicId } = useUserContext();
+  // const { setPicId } = useUserContext();
   const navigation = useNavigation();
   const [image, setImage] = useState(undefined);
 
@@ -221,7 +221,7 @@ const NewSignUpScreen = () => {
         /> */}
 
         <CustomButton
-          text="Register"
+          text={setting ? 'Setting up...' : 'Set Up account'}
           onPress={handleSubmit(signUp)} bgColor={undefined} fgColor={undefined} />
 
       </ScrollView>
