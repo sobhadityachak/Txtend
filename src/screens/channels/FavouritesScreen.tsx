@@ -13,7 +13,7 @@ const FavouritesScreen = (props) => {
       // navigate to a screen for this channel
       navigation.navigate("ChannelScreen", {
         screen: "Chat",
-        params: { channelId: channel.id },
+        params: { channel },
       });
     };
     const publicFilters = {
@@ -22,7 +22,7 @@ const FavouritesScreen = (props) => {
     };
     return (
       <OverlayProvider >
-        <SafeAreaView style={{ height: 120, }}>
+        <SafeAreaView style={{ height: 100, }}>
           <View style={{
             // color: 'white',
             // opacity: 1,

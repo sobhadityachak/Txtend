@@ -13,7 +13,7 @@ const Dms = (props) => {
       // navigate to a screen for this channel
       navigation.navigate("ChannelScreen", {
         screen: "Chat",
-        params: { channelId: channel.id },
+        params: { channel },
       });
     };
     const onNewChat = () => {
@@ -23,7 +23,7 @@ const Dms = (props) => {
     };
     const privateFilters = { type: "messaging", members: { $in: [userId] } };
     return (<OverlayProvider >
-      <SafeAreaView style={{ height: 120, }}>
+      <SafeAreaView style={{ height: 100, }}>
         <View style={{
           // color: 'white',
           // opacity: 1,

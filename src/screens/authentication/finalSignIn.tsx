@@ -70,19 +70,23 @@ const FinalSignInScreen = () => {
     console.log(password, usrName, code);
 
     try {
-      await Auth.forgotPasswordSubmit(usrName, code, password);
+      // await Auth.forgotPasswordSubmit(usrName, code, password);
       // navigation.navigate("SignIn");
+      setModalVisible(false)
+      navigation.replace('Profile', {usrName,code,password});
     }
     catch (e) {
-      // Alert.alert('Oops', e.message);
+      Alert.alert('Oops', e.message);
       // return;
     }
-    try {
-      // await Auth.signIn(usrName, password);
-      navigation.navigate('Profile');
-    } catch (error) {
-      Alert.alert('Oops', error.message)
-    }
+    // try {
+    //   // await Auth.signIn(usrName, password);
+    //   setModalVisible(false)
+    //   navigation.push('Profile');
+    // } catch (error) {
+    //   Alert.alert('Oops', error.message)
+    // }
+    
     finally{
       setLoadingOTP(!loadingOTP);
     }

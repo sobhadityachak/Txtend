@@ -24,8 +24,8 @@
     },
     "android": {
       "permissions": [],
-      "package": "com.interestingTechnologies.txtend",
-      "versionCode": 5
+      "package": "com.txtend.myapp",
+      "versionCode": 8
       // "googleServicesFile": "./google-services.json"
   },
   "web": {

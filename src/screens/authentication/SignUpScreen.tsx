@@ -1,4 +1,4 @@
-import { Auth } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
 import React from "react";
 import { useState } from "react";
 import {
@@ -10,58 +10,81 @@ import {
   Image,
   View,
   TouchableOpacity,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useChatContext } from "stream-chat-expo";
 import { useAuthContext, useUserContext } from "../../contexts/AuthContext";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
-import { useForm } from "react-hook-form";
+import { Controller, ControllerFieldState, ControllerRenderProps, useForm, UseFormStateReturn } from "react-hook-form";
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from "@expo/vector-icons";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
+import { getStreamToken } from "../../graphql/queries";
 
 const NewSignUpScreen = () => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const { setUserId } = useAuthContext();
-  const {setPicId} = useUserContext();
+  const { setPicId } = useUserContext();
   const navigation = useNavigation();
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(undefined);
 
   const { client } = useChatContext();
+
+  const route = useRoute();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
 
-  } = useForm();
+  } = useForm({
+    defaultValues:{
+      username: route?.params?.usrName
+    }
+  });
 
-  // const connectUser = async () => {
-  //   // sign in with your backend and get the user token
+  const connectUser = async () => {
+    // sign in with your backend and get the user token
 
+    const userData = await Auth.currentAuthenticatedUser();
+    const { sub, username, } = userData.attributes;
 
-  //   await client.connectUser(
-  //     {
-  //       id: username,
-  //       name: name,
-  //       image:
-  //         "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
-  //     },
-  //     client.devToken(username)
-  //   );
+    const tokenResponse = await API.graphql(graphqlOperation(getStreamToken));
+    const token = tokenResponse?.data?.getStreamToken;
+    if (!token) {
+      Alert.alert("Failed to creat ID check your connection and retry...!");
+      return;
+    } else console.warn(token);
+    console.log(
+      sub, name, username
+    );
+    await client.connectUser(
+      {
+        id: sub,
+        name: name,
+        // image: image,
+        number: username,
+        // "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
+      },
+      token //token dynamically generated from aws backend
+      //client.devToken(sub)
+    );
 
-  //   const channel = client.channel("livestream", "public", { name: "Public" });
-  //   await channel.watch();
+    const channel = client.channel("livestream", "public", { name: "Public" });
+    await channel.watch();
+    // const channels = client.channels();
 
-  //  setUserId(username);
-  // //  setUserImage()
+    setUserId(sub);
+    //  setUserImage()
 
-  // };
+  };
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -76,19 +99,47 @@ const NewSignUpScreen = () => {
     if (!result.cancelled) {
       setImage(result.uri);
     }
+    const { control } = useForm({
+      defaultValues: {
+        picID: image
+      }
+    })
+    return (
+      <Controller
+        control={control}
+        name="picID" render={
+          function ({
+            field, fieldState, formState, }: {
+              field: ControllerRenderProps<{ picID: null; }, "picID">;
+              fieldState: ControllerFieldState;
+              formState: UseFormStateReturn<{ picID: null; }>;
+            }): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
+            throw new Error("Function not implemented.");
+          }} />
+    )
   };
 
-  const signUp = () => {
-    //  if(!connectUser()) return(
-    //    <>
-    //    <ActivityIndicator />
-    //    <AppLoading/>
-    //     </>
-    //  );
-    // connectUser();
+  const signUp = async () => {
+    
     // console.log(username)
     // navigate to the home page
-    navigation.goBack();
+    // navigation.goBack();
+    try {
+      // await Auth.forgotPasswordSubmit(
+      //   route?.params?.usrName, 
+      //   route?.params?.code, 
+      //   route?.params?.password);
+      await Auth.signIn(route?.params?.usrName, route?.params?.password);
+      if (!connectUser()) return (
+        <>
+          <ActivityIndicator />
+          <AppLoading />
+        </>
+      );
+      connectUser();
+    } catch (e) {
+      console.log(e.message)
+    }
   };
 
   return (
@@ -99,12 +150,12 @@ const NewSignUpScreen = () => {
 
         <Text style={styles.text}>ACCOUNT INFORMATION</Text>
 
-        <View style={imageUploaderStyles.container}>
+        {/* <View style={imageUploaderStyles.container}>
           {
-            image && <Image source={{ uri: image }} style={{ 
+            image && <Image source={{ uri: image }} style={{
               width: 200, height: 200,
               borderRadius: 70,
-            
+
             }} />
           }
 
@@ -115,9 +166,9 @@ const NewSignUpScreen = () => {
             </TouchableOpacity>
           </View>
 
-          </View>
+        </View> */}
 
-          <CustomInput
+        <CustomInput
           name="name"
           control={control}
           placeholder="Name"
@@ -159,19 +210,6 @@ const NewSignUpScreen = () => {
                       required: 'Email is required',
                       pattern: { value: EMAIL_REGEX, message: 'Email is invalid' },
                   }} secureTextEntry={undefined}        /> */}
-        <CustomInput
-          name="password"
-          control={control}
-          placeholder="Password with numeric value"
-          secureTextEntry
-          rules={{
-            required: 'Password is required with numeric value',
-            minLength: {
-              value: 6,
-              message: 'Password should be at least 6 characters long',
-            },
-          }}
-        />
         {/* <CustomInput
           name="password-repeat"
           control={control}
@@ -185,7 +223,7 @@ const NewSignUpScreen = () => {
         <CustomButton
           text="Register"
           onPress={handleSubmit(signUp)} bgColor={undefined} fgColor={undefined} />
-        
+
       </ScrollView>
     </SafeAreaView>
   );

@@ -50,7 +50,7 @@ const NewSignInScreen = () => {
 
     setSendingOTP(true);
     try {
-      await Auth.forgotPassword(data.username);
+      await Auth.forgotPassword("+91"+data.username);
       // navigation.push('ConfirmPhone')
       //   const response = await Auth.signIn(data.username, data.password);
       //   console.log(response);
@@ -58,7 +58,7 @@ const NewSignInScreen = () => {
       Alert.alert('Oops', e.message);
     }
     setSendingOTP(!sendingOTP);
-    setusrName(data.username)
+    setusrName("+91"+data.username)
     setModalVisible(true)
   };
 
@@ -77,14 +77,14 @@ const NewSignInScreen = () => {
       // return;
     }
     try {
-      await Auth.signIn(usrName, password);
-      navigation.navigate('Profile');
+      // await Auth.signIn(usrName, password);
+      navigation.replace('Profile', {usrName,password});
     } catch (error) {
       Alert.alert('Oops', error.message)
     }
-    finally{
-      setLoadingOTP(!loadingOTP);
-    }
+    // finally{
+      // setLoadingOTP(!loadingOTP);
+    // }
   };
 
   const onResendPress = async () => {
@@ -102,7 +102,7 @@ const NewSignInScreen = () => {
     }
   };
   const onSignUpPress = () => {
-    navigation.navigate('SignUp');
+    navigation.replace('SignUp');
   };
 
   return (
@@ -170,11 +170,11 @@ const NewSignInScreen = () => {
 
               },
               minLength: {
-                value: 12,
+                value: 10,
                 message: 'Username should be at least 12 characters long',
               },
               maxLength: {
-                value: 15,
+                value: 10,
                 message: 'Username should be max 15 characters long',
               },
             }} secureTextEntry={undefined} />

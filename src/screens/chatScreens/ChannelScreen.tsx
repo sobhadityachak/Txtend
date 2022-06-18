@@ -41,7 +41,7 @@ const ChannelScreen = () => {
     fetchChannel();
   }, [channelId]);
 
-  if (!channelId) {
+  if (!channelObject) {
     return (
       <View style={styles.errorContainer}>
         <Text style={styles.errorText}>
@@ -54,7 +54,7 @@ const ChannelScreen = () => {
   return (
     <SafeAreaView>
 
-      <Channel channel={channelId} key={channelId.data.id}  >
+      <Channel channel={channelObject} key={channelObject.data.id}  >
         {/* <ChannelHeader /> */}
         <View style={{
           flexDirection: "row",
@@ -69,7 +69,7 @@ const ChannelScreen = () => {
 
           {/* useChatContext to show channel memberCount and active members */}
 
-          <Text>{channelId?.data?.name}</Text>
+          <Text>{channelObject?.data?.name}</Text>
         </View>
 
         {/* <ChannelPreviewTitle channel={channel} displayName={"df"}/> */}

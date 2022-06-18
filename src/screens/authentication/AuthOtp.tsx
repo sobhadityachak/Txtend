@@ -63,8 +63,7 @@ const SignUpScreen = () => {
               value: 24,
               message: 'Name should be max 24 characters long',
             },
-          }}
-        />
+          }} secureTextEntry={undefined}        />
 
         <CustomInput
           name="username"
@@ -80,17 +79,15 @@ const SignUpScreen = () => {
               value: 24,
               message: 'Username should be max 24 characters long',
             },
-          }}
-        />
+          }} secureTextEntry={undefined}        />
         <CustomInput
           name="email"
           control={control}
           placeholder="Email"
           rules={{
             required: 'Email is required',
-            pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
-          }}
-        />
+            pattern: { value: EMAIL_REGEX, message: 'Email is invalid' },
+          }} secureTextEntry={undefined}        />
         <CustomInput
           name="password"
           control={control}
@@ -116,8 +113,7 @@ const SignUpScreen = () => {
 
         <CustomButton
           text="Register"
-          onPress={handleSubmit(onRegisterPressed)}
-        />
+          onPress={handleSubmit(onRegisterPressed)} bgColor={undefined} fgColor={undefined}        />
 
         <Text style={styles.text}>
           By registering, you confirm that you accept our{' '}
@@ -135,8 +131,7 @@ const SignUpScreen = () => {
         <CustomButton
           text="Have an account? Sign in"
           onPress={onSignInPress}
-          type="TERTIARY"
-        />
+          type="TERTIARY" bgColor={undefined} fgColor={undefined}        />
       </View>
     </ScrollView>
   );

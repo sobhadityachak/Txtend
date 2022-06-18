@@ -112,7 +112,7 @@ const FinalSignUpScreen = () => {
 
         <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root}>
           <View><Text style={{ color: '#3B71F3', fontSize: 22, fontWeight: 'bold', marginTop: -50, }}>Set up your Profile</Text></View>
-          <TouchableOpacity onPress={pickImage} >
+          {/* <TouchableOpacity onPress={pickImage} >
           <View style={imageUploaderStyles.container}>
             {
               image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
@@ -126,7 +126,7 @@ const FinalSignUpScreen = () => {
               
             </View>
             </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
           <View style={styles.root1}>
             <CustomInput

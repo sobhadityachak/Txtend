@@ -21,7 +21,7 @@ const GroupChats = (props) => {
       // navigate to a screen for this channel
       navigation.navigate("ChannelScreen", {
         screen: "Chat",
-        params: { channelId: channel.id},
+        params: { channel },
       });
     };
     const onChannelCreate = () => {

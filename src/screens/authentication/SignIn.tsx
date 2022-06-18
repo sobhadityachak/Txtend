@@ -73,11 +73,11 @@ const SignInScreen = () => {
 
               },
               minLength: {
-                value: 12,
+                value: 10,
                 message: 'Username should be at least 12 characters long',
               },
               maxLength: {
-                value: 15,
+                value: 10,
                 message: 'Username should be max 15 characters long',
               },
             }} secureTextEntry={undefined} />
@@ -102,7 +102,7 @@ const SignInScreen = () => {
           <CustomButton
             text="Forgot password?"
             onPress={onForgotPasswordPressed}
-            type="TERTIARY" bgColor={undefined} fgColor={undefined} />
+            type="SECONDARY" bgColor={undefined} fgColor={undefined} />
 
           {/* <SocialSignInButtons /> */}
 

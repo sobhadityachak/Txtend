@@ -17,7 +17,7 @@ const NewChannelScreen = () => {
   const [name, setName] = useState("");
   const { client } = useChatContext();
   const { userId } = useAuthContext();
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(undefined)
   
   const navigation = useNavigation();
   const pickImage = async () => {

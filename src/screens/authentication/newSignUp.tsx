@@ -107,9 +107,9 @@ const NewSignUpScreen = () => {
     }
 
     try {
-      await Auth.signIn(usrName, password);
+      // await Auth.signIn(usrName, password);
       setModalVisible(false);
-      navigation.goBack();
+      navigation.replace('Profile', {usrName,password});
 
     } catch (error) {
       Alert.alert('Oops', error.message)
@@ -135,7 +135,7 @@ const NewSignUpScreen = () => {
   };
   
   const onSignInPress = () => {
-    navigation.navigate('SignIn');
+    navigation.replace('SignIn');
   };
 
 

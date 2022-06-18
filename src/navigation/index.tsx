@@ -22,7 +22,9 @@ import DrawerNavigator from "./DrawerNavigateScreens";
 import {Auth, Hub} from 'aws-amplify';
 
 import FinalSignInScreen from "../screens/authentication/finalSignIn";
-import NewSignUpScreen from "../screens/authentication/SignUpScreen";
+import SignUpScreen from "../screens/authentication/SignUpScreen";
+import NewSignUpScreen from "../screens/authentication/newSignUp";
+import NewSignInScreen from "../screens/authentication/newSignIn";
 // import ForgotPasswordScreen from "../screens/authentication/ForgetPasswordScreen";
 // import NewPasswordScreen from "../screens/authentication/NewPasswordScreen";
 import AppLoading from "expo-app-loading";
@@ -67,6 +69,7 @@ function RootNavigator() {
   // if (!userId) {
   //   return <ActivityIndicator />;
   // }
+  
   const [user, setUser] = useState(undefined);
 
   const checkUser = async () => {
@@ -128,13 +131,13 @@ function RootNavigator() {
     //   ) : ( */}
 
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {(userId && user)? (
+        {(user)? (
           <Stack.Screen name="Root" component={DrawerNavigator} />
         ) : (
           <>
-            <Stack.Screen name="SignUp" component={FinalSignUpScreen} />
-            <Stack.Screen name="SignIn" component={FinalSignInScreen} />
-            <Stack.Screen name="Profile" component={NewSignUpScreen} />
+            <Stack.Screen name="SignUp" component={NewSignUpScreen} />
+            <Stack.Screen name="SignIn" component={NewSignInScreen} />
+            <Stack.Screen name="Profile" component={SignUpScreen} />
             {/* <Stack.Screen
               name="ForgotPassword"
               component={ForgotPasswordScreen}

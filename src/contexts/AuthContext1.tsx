@@ -29,7 +29,7 @@ const AuthContextComponent = ({ children, client }) => {
         image:
           "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
       },
-      token; //token dynamically generated from aws backend
+      token //token dynamically generated from aws backend
       // client.devToken(username)
     );
 
