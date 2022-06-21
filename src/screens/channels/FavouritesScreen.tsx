@@ -1,5 +1,5 @@
 import { Icon, Button } from "@rneui/base";
-import React from "react";
+import * as React from 'react'
 import { SafeAreaView, View, Text } from "react-native";
 import { OverlayProvider } from "stream-chat-expo";
 import { useAuthContext } from "../../contexts/AuthContext1";
@@ -21,7 +21,7 @@ const FavouritesScreen = (props) => {
       members: { $in: [userId] },
     };
     return (
-      <OverlayProvider >
+      <>
         <SafeAreaView style={{ marginTop: 20, }}>
           <View style={{
             // color: 'white',
@@ -97,7 +97,7 @@ const FavouritesScreen = (props) => {
         </SafeAreaView>
   
         {/* <ChannelList onSelect={onChannelSelect} filters={publicFilters} /> */}
-      </OverlayProvider>
+      </>
     )
   }
 export default FavouritesScreen;

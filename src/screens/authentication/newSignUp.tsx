@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
+import * as React from 'react'
+
 import {
   View,
   Text,
@@ -146,7 +148,7 @@ const NewSignUpScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
 
         <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root}>
-          <View><Text style={{ color: '#3B71F3', fontSize: 22, fontWeight: 'bold', marginTop: -50, }}>Confirm your Phone number</Text></View>
+          <View><Text style={{ color: '#3B71F3', fontSize: 28, fontWeight: 'bold', marginTop: 20,}}>Sign Up</Text></View>
           <View style={styles.centeredView}>
             <Modal
               animationType="slide"
@@ -158,13 +160,13 @@ const NewSignUpScreen = () => {
               }}
             >
               <View style={styles.centeredView}>
-                <View style={styles.modalView}>
+                <View style={styles.modalView}> 
                   <TextInput
 
                     style={styles.input}
                     onChangeText={onChangeCode}
                     value={code}
-                    placeholder="enter received OTP"
+                    placeholder="Enter OTP"
                     keyboardType="numeric"
 
                   />
@@ -197,7 +199,8 @@ const NewSignUpScreen = () => {
             <CustomInput
               name="username"
               control={control}
-              placeholder="Enter Phone number"
+              placeholder="enter your 10 digit phone number"
+              
               rules={{
                 required: 'Phone Number with county code is required for password verification',
                 length: {
@@ -211,7 +214,8 @@ const NewSignUpScreen = () => {
                   value: 10,
                   message: 'phone number should be max 10 characters long',
                 },
-              }} secureTextEntry={undefined} />
+              }} secureTextEntry={undefined}
+               />
 
             <CustomButton
               text={loading ? 'Sending OTP...' : 'Send OTP!'}
@@ -234,6 +238,7 @@ const NewSignUpScreen = () => {
             style={[styles.logo, { height: height * 0.3 }]}
             resizeMode="contain"
           />
+          
         </ImageBackground>
 
 
@@ -246,7 +251,7 @@ const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
     padding: 80,
-    marginTop: 10,
+    marginTop: 0,
     display: "flex",
 
     resizeMode: 'contain',
@@ -255,7 +260,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor:'white',
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -267,7 +272,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-    width: '70%',
+    width: '79%',
+    height: 325,
   },
   logo: {
     width: '40%',
@@ -282,25 +288,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: 12,
+  
     
   },
   root1: {
     backgroundColor: 'rgba(255,255 , 255, 0.6)',
-    marginTop: -40,
-    marginBottom: 0,
+    marginTop: -60,
+    marginBottom: 210,
     marginHorizontal: -55,
     padding: 45,
     borderRadius: 35,
     paddingBottom: 70,
   },
   input: {
-    height: 40,
-    width: '70%',
+    height: 70,
+    width: '100%',
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 2,
     padding: 10,
-    borderRadius: 60,
+    borderRadius: 50,
+    fontSize: 18,
+    textAlign : 'center',
 
   }
 });

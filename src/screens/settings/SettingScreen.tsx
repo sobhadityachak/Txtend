@@ -1,5 +1,6 @@
 // import React, { Component } from "react";
-import React, { Component } from 'react';
+// import  { Component } from 'react';
+import * as React from 'react'
 import { Text, View, StyleSheet, SafeAreaView, ScrollView, FlatList, Linking, TouchableOpacity, Image } from 'react-native';
 // import { Provider, Appbar, Card, IconButton, Avatar, Colors } from 'react-native-paper';
 import { useRoute, useNavigation } from "@react-navigation/native";
@@ -145,7 +146,7 @@ const SettingScreen = () => {
             <Text style={styles.text}>Blocked Contacts</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={_deleteall}>
-            <Text style={styles.text4}>Delete all Chats</Text>
+            <Text style={styles.text4}>Log out</Text>
           </TouchableOpacity>
         </View>
 

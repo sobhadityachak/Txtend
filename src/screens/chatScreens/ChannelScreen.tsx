@@ -1,14 +1,16 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import React from "react";
+import * as React from 'react'
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { Channel, MessageList, MessageInput, ChannelAvatar, useChatContext } from "stream-chat-expo";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { Channel, MessageList, MessageInput, ChannelAvatar, useChatContext, OverlayProvider, Chat } from "stream-chat-expo";
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { FontAwesome5, AntDesign } from "@expo/vector-icons";
 import { Icon } from "@rneui/themed";
 
 const ChannelScreen = () => {
   const route = useRoute();
+  const {bottom, top } = useSafeAreaInsets();
   const navigation = useNavigation();
+   const {client} = useChatContext();
   const channel = route.params?.channel;
   //param is null initaially thats why we have to access
   //it safely using '?'
@@ -33,6 +35,8 @@ const ChannelScreen = () => {
   }
 
   return (
+    <OverlayProvider topInset={top} bottomInset={bottom}>
+            <Chat client={client}>
     <SafeAreaView style={styles.container}>
 
       <Channel channel={channel} key={channel.data.id}  >
@@ -60,6 +64,8 @@ const ChannelScreen = () => {
       </Channel>
 
     </SafeAreaView>
+    </Chat>
+    </OverlayProvider>
   );
 };
 

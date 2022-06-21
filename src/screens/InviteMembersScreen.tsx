@@ -1,5 +1,6 @@
 import { View, Text, FlatList, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
+import * as React from 'react'
+import { useEffect, useState } from "react";
 import { Channel, useChatContext } from "stream-chat-expo";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useNavigation, useRoute } from "@react-navigation/native";

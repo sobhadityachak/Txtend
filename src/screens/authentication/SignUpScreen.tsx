@@ -1,5 +1,5 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
-import React from "react";
+import * as React from 'react'
 import { useState } from "react";
 import {
   Text,
@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Alert,
+  ImageBackground,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useChatContext } from "stream-chat-expo";
@@ -33,7 +34,7 @@ const NewSignUpScreen = () => {
   const { setUserId } = useAuthContext();
   // const { setPicId } = useUserContext();
   const navigation = useNavigation();
-  const [image, setImage] = useState(undefined);
+  var [image, setImage] = useState(null);
 
   const { client } = useChatContext();
 
@@ -69,7 +70,7 @@ const NewSignUpScreen = () => {
       {
         id: sub,
         name: name,
-        // image: image,
+        image: `${image}`,
         number: username,
         // "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
       },
@@ -99,24 +100,24 @@ const NewSignUpScreen = () => {
     if (!result.cancelled) {
       setImage(result.uri);
     }
-    const { control } = useForm({
-      defaultValues: {
-        picID: image
-      }
-    })
-    return (
-      <Controller
-        control={control}
-        name="picID" render={
-          function ({
-            field, fieldState, formState, }: {
-              field: ControllerRenderProps<{ picID: null; }, "picID">;
-              fieldState: ControllerFieldState;
-              formState: UseFormStateReturn<{ picID: null; }>;
-            }): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
-            throw new Error("Function not implemented.");
-          }} />
-    )
+    // const { control } = useForm({
+    //   defaultValues: {
+    //     picID: image
+    //   }
+    // })
+    // return (
+    //   <Controller
+    //     control={control}
+    //     name="picID" render={
+    //       function ({
+    //         field, fieldState, formState, }: {
+    //           field: ControllerRenderProps<{ picID: null; }, "picID">;
+    //           fieldState: ControllerFieldState;
+    //           formState: UseFormStateReturn<{ picID: null; }>;
+    //         }): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
+    //         throw new Error("Function not implemented.");
+    //       }} />
+    // )
   };
 
   const signUp = async () => {
@@ -136,6 +137,7 @@ const NewSignUpScreen = () => {
           <AppLoading />
         </>
       );
+      setSetting(true);
       connectUser();
     } catch (e) {
       console.log(e.message)
@@ -143,14 +145,16 @@ const NewSignUpScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView >
       <ScrollView>
-        <Text style={styles.title}>Welcome back</Text>
-        <Text style={styles.subtitle}>We are so excited to see you again</Text>
+      <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root}>
+          <View><Text style={{ color: '#3B71F3', fontSize: 25, fontWeight: 'bold', marginTop: 0,}}>Set up your Profile</Text></View>
 
-        <Text style={styles.text}>ACCOUNT INFORMATION</Text>
+        
 
-        {/* <View style={imageUploaderStyles.container}>
+       
+ <View style={styles.root1}>
+ <View style={imageUploaderStyles.container}>
           {
             image && <Image source={{ uri: image }} style={{
               width: 200, height: 200,
@@ -166,14 +170,13 @@ const NewSignUpScreen = () => {
             </TouchableOpacity>
           </View>
 
-        </View> */}
-
+        </View>
         <CustomInput
           name="name"
           control={control}
           placeholder="Name"
           rules={{
-            required: 'Name is required',
+            required: 'Enter a User Name for Txtend',
             minLength: {
               value: 3,
               message: 'Name should be at least 3 characters long',
@@ -187,7 +190,7 @@ const NewSignUpScreen = () => {
         <CustomInput
           name="username"
           control={control}
-          placeholder="Phone number eg.. +919876543210"
+          placeholder="Enter your 10 Digit Phone number"
           rules={{
             required: 'Phone Number with county code is required for password verification',
             length: {
@@ -219,23 +222,39 @@ const NewSignUpScreen = () => {
             validate: value => value === pwd || 'Password do not match',
           }}
         /> */}
-
+<TouchableOpacity>
         <CustomButton
-          text={setting ? 'Setting up...' : 'Set Up account'}
+          text={setting ? 'Welcome to... Txtend' : 'All Set! Enter'}
           onPress={handleSubmit(signUp)} bgColor={undefined} fgColor={undefined} />
-
+          </TouchableOpacity>
+          </View>
+ </ImageBackground>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#36393E",
+  root: {
+    alignItems: 'center',
+    padding: 80,
+    marginTop: 0,
+    display: "flex",
+
+    resizeMode: 'contain',
+    //height:820,
     flex: 1,
-    padding: 10,
-    paddingVertical: 30,
   },
+  root1: {
+    backgroundColor: 'rgba(255,255 , 255, 0.6)',
+    marginTop: 100,
+    marginBottom: 110,
+    marginHorizontal: -55,
+    padding: 45,
+    borderRadius: 35,
+    paddingBottom: 70,
+  },
+  
   title: {
     color: "white",
     fontSize: 30,
@@ -280,13 +299,16 @@ const styles = StyleSheet.create({
 const imageUploaderStyles = StyleSheet.create({
   container: {
     elevation: 2,
-    height: 150,
-    width: 150,
+    height: 100,
+    width: 100,
     backgroundColor: '#efefef',
     position: 'relative',
     borderRadius: 70,
     overflow: 'hidden',
-    margin: 20,
+    margin: 10,
+    marginTop: -105,
+
+    alignSelf:'center',
   },
   uploadBtnContainer: {
     opacity: 0.7,
@@ -295,7 +317,7 @@ const imageUploaderStyles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'lightgrey',
     width: '100%',
-    height: '25%',
+    height: '50%',
   },
   uploadBtn: {
     display: 'flex',

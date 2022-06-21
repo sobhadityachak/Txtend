@@ -1,9 +1,10 @@
-import React from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import * as React from 'react'
+import {View, Text, StyleSheet, Pressable,} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const CustomButton = ({onPress, text, type = 'PRIMARY', bgColor, fgColor}) => {
   return (
+    
     <Pressable
       onPress={onPress}
       style={[
@@ -20,6 +21,7 @@ const CustomButton = ({onPress, text, type = 'PRIMARY', bgColor, fgColor}) => {
         {text}
       </Text>
     </Pressable>
+    
   );
 };
 
@@ -41,11 +43,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#3B71F3',
     paddingHorizontal:70,
     marginTop:30,
+    width: '100%',
   },
 
   container_SECONDARY: {
     borderColor: '#3B71F3',
     borderWidth: 2,
+    backgroundColor:'#3B71F3',
+    width: '70%',
+    marginTop:10,
   },
 
   container_TERTIARY: {
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
   },
 
   text_SECONDARY: {
-    color: '#3B71F3',
+    color: 'white',
   },
 
   text_TERTIARY: {

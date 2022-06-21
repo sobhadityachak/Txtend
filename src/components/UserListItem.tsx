@@ -1,5 +1,5 @@
 import { Pressable, Text, StyleSheet, Image, View } from "react-native";
-import React from "react";
+import * as React from 'react'
 import { AntDesign } from "@expo/vector-icons";
 
 const UserListItem = ({ user, onPress, isSelected = false }) => {

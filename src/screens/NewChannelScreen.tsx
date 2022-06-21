@@ -1,5 +1,6 @@
 import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
-import React, { useState } from "react";
+import * as React from 'react'
+import { useState } from "react";
 // import Button from "../components/Button";
 import { useChatContext } from "stream-chat-expo";
 import { v4 as uuidv4 } from "uuid";

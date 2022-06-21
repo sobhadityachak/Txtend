@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { View, Text, SafeAreaView,StyleSheet } from "react-native";
-import React from "react";
+import * as React from 'react'
 import { OverlayProvider, useChatContext } from "stream-chat-expo";
 import { FlatList } from "react-native-gesture-handler";
 import UserListItem from "../../components/UserListItem";

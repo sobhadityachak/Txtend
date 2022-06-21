@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react'
+
 import {
   View,
   Text,
@@ -10,6 +12,7 @@ import {
   Alert,
   Modal,
   Pressable,
+  ImageBackground,
 } from 'react-native';
 import Logo from '../../../assets/images/Logo_1.png';
 import CustomInput from '../../components/CustomInput';
@@ -108,12 +111,10 @@ const NewSignInScreen = () => {
   return (
     <SafeAreaView style={{ paddingTop: 0, }}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.root}>
-          <Image
-            source={require('../../../assets/images/Logo.png')}
-            style={[styles.logo, { height: height * 0.3 }]}
-            resizeMode="contain"
-          />
+      <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root1}>
+      <View><Text style={{ color: '#3B71F3', fontSize: 28, fontWeight: 'bold', marginTop: 20,}}>Sign In</Text></View>
+        
+          
           <View style={styles.centeredView}>
             <Modal
               animationType="slide"
@@ -131,7 +132,7 @@ const NewSignInScreen = () => {
                     style={styles.input}
                     onChangeText={onChangeCode}
                     value={code}
-                    placeholder="enter received OTP"
+                    placeholder="Enter OTP"
                     keyboardType="numeric"
 
                   />
@@ -160,10 +161,11 @@ const NewSignInScreen = () => {
               <Text style={styles.textStyle}>Show Modal</Text>
             </Pressable> */}
           </View>
+          <View style={styles.root2}>
           <CustomInput
             name="username"
             control={control}
-            placeholder="Verify Phone number"
+            placeholder="enter your 10 digit phone number"
             rules={{
               required: 'Phone Number with county code is required for password verification',
               length: {
@@ -191,7 +193,9 @@ const NewSignInScreen = () => {
             text="Don't have an account? Create one"
             onPress={onSignUpPress}
             type="TERTIARY" bgColor={undefined} fgColor={undefined} />
-        </View>
+            </View>
+        
+        </ImageBackground>
       </ScrollView>
     </SafeAreaView>
   );
@@ -202,6 +206,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 50,
     margin: 10,
+  },
+  root1: {
+    alignItems: 'center',
+    padding: 80,
+    marginTop: 0,
+    display: "flex",
+
+    resizeMode: 'contain',
+    //height:820,
+    flex: 1,
   },
   logo: {
     width: '40%',
@@ -229,7 +243,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-    width: '70%',
+    width: '79%',
+    height: 325,
+  },
+  root2: {
+    backgroundColor: 'rgba(255,255 , 255, 0.6)',
+    marginTop: 95,
+    marginBottom: 157,
+    marginHorizontal: -55,
+    padding: 45,
+    borderRadius: 35,
+    paddingBottom: 70,
   },
   button: {
     borderRadius: 20,
@@ -252,12 +276,14 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   input: {
-    height: 40,
-    width: '70%',
+    height: 70,
+    width: '100%',
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 2,
     padding: 10,
-    borderRadius: 60,
+    borderRadius: 50,
+    fontSize: 18,
+    textAlign : 'center',
 
   }
 });

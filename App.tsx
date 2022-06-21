@@ -12,7 +12,7 @@ import { StreamChat } from "stream-chat";
 import { OverlayProvider, Chat, Theme, DeepPartial } from "stream-chat-expo";
 import AuthContext from "./src/contexts/AuthContext1";
 // import { StreamColors } from "./src/constants/Colors";
-import React from "react";
+import * as React from 'react'
 import { Amplify, } from "aws-amplify";
 // import { withAuthenticator } from "aws-amplify-react-native";
 import awsconfig from "./src/aws-exports";

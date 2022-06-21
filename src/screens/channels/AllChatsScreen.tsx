@@ -1,13 +1,15 @@
 import { Icon, Button } from "@rneui/base";
 // import { Button } from "@rneui/themed";
-import React from "react";
+import * as React from 'react'
 import { SafeAreaView, View, Text } from "react-native";
-import { OverlayProvider, ChannelList } from "stream-chat-expo";
+import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
+import { OverlayProvider, ChannelList, Chat, useChatContext } from "stream-chat-expo";
 import { useAuthContext } from "../../contexts/AuthContext1";
 
 const AllChats = (props) => {
     const { userId } = useAuthContext();
-  
+    const {bottom} = useSafeAreaInsets();
+    const { client } = useChatContext();
     const { navigation } = props;
   
     const onChannelSelect = (channel) => {
@@ -26,8 +28,9 @@ const AllChats = (props) => {
       // type: { $ne: "messaging" },
       members: { $in: [userId] },
     };
+
     return (
-      <OverlayProvider >
+     <SafeAreaProvider>
         <SafeAreaView style={{ marginTop: 20, }}>
           <View style={{
             // color: 'white',
@@ -107,9 +110,12 @@ const AllChats = (props) => {
             />
           </View>
         </SafeAreaView>
-  
+   <OverlayProvider  >
+   <Chat client={client} >
         <ChannelList onSelect={onChannelSelect} filters={publicFilters} />
+        </Chat>
       </OverlayProvider>
+      </SafeAreaProvider>
     )
   }
   export default AllChats;

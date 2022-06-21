@@ -23,7 +23,7 @@ import { Auth, API, graphqlOperation } from "aws-amplify";
 import { createContext, useState, useContext, useEffect } from "react";
 import { getStreamToken } from "../graphql/queries";
 import { Alert, Pressable, SafeAreaView, ScrollView, TextInput, Text, StyleSheet, ActivityIndicator } from "react-native";
-import React from 'react';
+import * as React from 'react'
 
 import messaging from '@react-native-firebase/messaging'
 import Navigation from "../navigation";

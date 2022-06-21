@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
-import React from "react";
+import * as React from 'react'
 import Colors from "../constants/Colors";
 
 const Button = ({ title = "Button", onPress = () => {} }) => {

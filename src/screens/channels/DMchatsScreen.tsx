@@ -1,12 +1,14 @@
 import { Button, Icon } from "@rneui/base";
-import React from "react";
+import * as React from 'react'
 import { SafeAreaView, View, Text } from "react-native";
-import { OverlayProvider, ChannelList } from "stream-chat-expo";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { OverlayProvider, ChannelList, useChatContext, Chat } from "stream-chat-expo";
 import { useAuthContext } from "../../contexts/AuthContext1";
 
 const Dms = (props) => {
   const { userId } = useAuthContext();
-
+  const {bottom} = useSafeAreaInsets();
+  const { client } = useChatContext();
   const { navigation } = props;
 
   const onChannelSelect = (channel) => {
@@ -23,7 +25,7 @@ const Dms = (props) => {
   };
   const privateFilters = { type: "messaging", members: { $in: [userId] } };
   return (
-  <OverlayProvider >
+  < >
     <SafeAreaView style={{ marginTop: 20, }}>
       <View style={{
         // color: 'white',
@@ -108,9 +110,12 @@ const Dms = (props) => {
         />
       </View>
     </SafeAreaView>
-
+    <OverlayProvider  >
+   <Chat client={client} >
     <ChannelList onSelect={onChannelSelect} filters={privateFilters} />
-  </OverlayProvider>
+    </Chat>
+      </OverlayProvider>
+  </>
   )
 }
 export default Dms;

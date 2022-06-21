@@ -111,7 +111,7 @@ const FinalSignUpScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
 
         <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root}>
-          <View><Text style={{ color: '#3B71F3', fontSize: 22, fontWeight: 'bold', marginTop: -50, }}>Set up your Profile</Text></View>
+          <View><Text style={{ color: '#3B71F3', fontSize: 22, fontWeight: 'bold', marginTop: -50, }}>Sign In</Text></View>
           {/* <TouchableOpacity onPress={pickImage} >
           <View style={imageUploaderStyles.container}>
             {

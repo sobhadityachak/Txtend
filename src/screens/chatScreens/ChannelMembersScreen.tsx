@@ -1,5 +1,6 @@
 import { View, Text, FlatList, ScrollView } from "react-native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";import * as React from 'react'
+
 import { useNavigation, useRoute } from "@react-navigation/native";
 import UserListItem from "../../components/UserListItem";
 // import Button from "../components/Button";

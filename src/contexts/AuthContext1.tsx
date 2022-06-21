@@ -2,7 +2,7 @@ import { Auth, API, graphqlOperation } from "aws-amplify";
 import { createContext, useState, useContext, useEffect } from "react";
 import { getStreamToken } from "../graphql/queries";
 import { Alert } from "react-native";
-import React from 'react';
+import * as React from 'react'
 const AuthContext = createContext({
   userId: null,
   setUserId: (newId: string) => {},
@@ -26,8 +26,8 @@ const AuthContextComponent = ({ children, client }) => {
       {
         id: sub,
         name: phone_number,
-        image:
-          "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
+        
+          // "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
       },
       token //token dynamically generated from aws backend
       // client.devToken(username)
