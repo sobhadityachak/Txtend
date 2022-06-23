@@ -116,7 +116,7 @@ function RootNavigator() {
   if (user === undefined) {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <AppLoading />
+        {/* <AppLoading /> */}
       </View>
     );
   }

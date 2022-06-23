@@ -70,7 +70,7 @@ const NewSignUpScreen = () => {
       {
         id: sub,
         name: name,
-        image: `${image}`,
+        // image: `${image}`,
         number: username,
         // "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
       },
@@ -130,7 +130,6 @@ const NewSignUpScreen = () => {
       //   route?.params?.usrName, 
       //   route?.params?.code, 
       //   route?.params?.password);
-      await Auth.signIn(route?.params?.usrName, route?.params?.password);
       if (!connectUser()) return (
         <>
           <ActivityIndicator />
@@ -139,9 +138,11 @@ const NewSignUpScreen = () => {
       );
       setSetting(true);
       connectUser();
+      await Auth.signIn(route?.params?.usrName, route?.params?.password);
     } catch (e) {
       console.log(e.message)
     }
+    // navigation.goBack();
   };
 
   return (
@@ -198,11 +199,11 @@ const NewSignUpScreen = () => {
             },
             minLength: {
               value: 12,
-              message: 'Username should be at least 12 characters long',
+              message: 'Phone number should be at least 12 characters long',
             },
             maxLength: {
               value: 15,
-              message: 'Username should be max 15 characters long',
+              message: 'Phone number should be max 15 characters long',
             },
           }} secureTextEntry={undefined} />
         {/* <CustomInput

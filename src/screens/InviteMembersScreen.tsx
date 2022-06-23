@@ -12,7 +12,7 @@ const InviteMembersScreen = () => {
   const [users, setUsers] = useState([]);
   const { userId } = useAuthContext();
   const [selectedUserIds, setSelectedUserIds] = useState([]);
-  
+
   const navigation = useNavigation();
   const route = useRoute();
   const channel = route?.params?.channel;
@@ -46,7 +46,7 @@ const InviteMembersScreen = () => {
     // await channel.addMembers([userId]);
     // navigation.goBack();
     //  navigation.navigate("ChannelScreen", {channel});
-     navigation.navigate("ChannelScreen", {
+    navigation.navigate("ChannelScreen", {
       screen: "Chat",
       params: { channel },
     });
@@ -56,42 +56,41 @@ const InviteMembersScreen = () => {
     <FlatList
       data={users}
       // style={styles.memberList}
-      
+
       renderItem={({ item }) => (
         <UserListItem
           user={item}
           onPress={selectUser}
           isSelected={selectedUserIds.includes(item.id)}
-          
         />
       )}
       ListHeaderComponent={() =>
         !!selectedUserIds.length && (
-          <Button 
-          title="Add Members"
-          onPress={inviteUsers}
-          buttonStyle={
-            styles.memberList
-          }
-          containerStyle={{
-            width: 260,
-            marginHorizontal: 30,
-            marginVertical: 5,
-            // marginBottom: 15,
-            borderRadius: 30,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-            // alignContent: 'flex-end',
-          }}
-          icon={{
-            // raised:true,
-            // reverse: true,
-            name: 'dingding',
-            type: 'ant-design',
-            size: 20,
-            // color: 'rgba(90, 154, 230, 1)',
-            color: 'white'
-          }}
+          <Button
+            title="Add Members"
+            onPress={inviteUsers}
+            buttonStyle={
+              styles.memberList
+            }
+            containerStyle={{
+              width: 260,
+              marginHorizontal: 30,
+              marginVertical: 5,
+              // marginBottom: 15,
+              borderRadius: 30,
+              justifyContent: 'center',
+              alignItems: 'flex-end',
+              // alignContent: 'flex-end',
+            }}
+            icon={{
+              // raised:true,
+              // reverse: true,
+              name: 'dingding',
+              type: 'ant-design',
+              size: 20,
+              // color: 'rgba(90, 154, 230, 1)',
+              color: 'white'
+            }}
           />
         )
       }

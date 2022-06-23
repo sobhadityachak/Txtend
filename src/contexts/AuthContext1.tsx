@@ -26,7 +26,7 @@ const AuthContextComponent = ({ children, client }) => {
       {
         id: sub,
         name: phone_number,
-        
+        // image:
           // "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
       },
       token //token dynamically generated from aws backend
