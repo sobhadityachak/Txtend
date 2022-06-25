@@ -2,31 +2,31 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
-import { Text, StyleSheet, View, Pressable, Touchable, TextBase, BackHandler, ActivityIndicator } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { Text, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Avatar, ChannelList, OverlayProvider } from "stream-chat-expo";
-import { useAuthContext, useUserContext } from "../contexts/AuthContext";
+import { useAuthContext } from "../contexts/AuthContext";
 // import ChannelScreen from "../screens/chatScreens/ChannelScreen";
 // import { Auth } from "aws-amplify";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import UserListScreen from "../screens/userlist/UserListScreen";
 // import Button from "../components/Button";
 // import ChannelMembersScreen from "../screens/chatScreens/ChannelMembersScreen";
-import { FontAwesome5 } from "@expo/vector-icons";
+// import  from "@expo/vector-icons";
 import NewChannelScreen from "../screens/NewChannelScreen";
 import ChannelStack from "./ChannelStack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 // import { favCon } from "../../assets/profile.jpg";
-import Navigation from ".";
+// import Navigation from ".";
 import SignUpScreen from "../screens/authentication/SignUpScreen";
 // import Colors from "../constants/Colors";
 // import { AntDesign } from '@expo/vector-icons';
 // import { FloatingAction } from "react-native-floating-action";
-import { Button, Icon, Image } from "@rneui/themed"
+import { Button, Icon } from "@rneui/themed"
 import SettingScreen from "../screens/settings/SettingScreen";
 import GroupChats from "../screens/channels/GroupchatScreen";
-import qrCodeGenerator from "../screens/barcode/qrcodeGenerator";
-import { Auth } from "aws-amplify";
+// import qrCodeGenerator from "../screens/barcode/qrcodeGenerator";
+// import { Auth } from "aws-amplify";
 import QrCodeGenerator from "../screens/barcode/qrcodeGenerator";
 import AllChats from "../screens/channels/AllChatsScreen";
 import Dms from "../screens/channels/DMchatsScreen";
@@ -36,26 +36,9 @@ import qrCodeScanner from "../screens/barcode/qrcodeScanner";
 // import messaging from '@react-native-firebase/messaging'
 
 const Drawer = createDrawerNavigator();
-// const CustomHead (...props) => {
-//   const { navigation } = props;
-
-//   return (
-//     <SafeAreaProvider>
-//       <SafeAreaView>
-//         <Text>Group chat</Text>
-//       </SafeAreaView>
-//     </SafeAreaProvider>
-//   ) 
-
-// };
-
 const DrawerNavigator = () => {
-
-
   return (
-
     <Drawer.Navigator
-
       drawerContent={CustomDrawerContent}
       backBehavior='history'
       // header
@@ -71,12 +54,6 @@ const DrawerNavigator = () => {
       }}
     >
       <Drawer.Screen
-        name="AllChats"
-        component={AllChats}
-        options={{ title: "All Chats" }}
-      />
-      <Drawer.Screen
-
         name="DMs"
         component={Dms}
         options={{
@@ -84,18 +61,19 @@ const DrawerNavigator = () => {
           // drawerLabel: {{focused: true, color:'white'}}
         }}
       />
-
-
+      <Drawer.Screen
+        name="AllChats"
+        component={AllChats}
+        options={{ title: "All Chats" }}
+      />
+      
       <Drawer.Screen
         name="ChannelScreen"
         component={ChannelStack}
         options={{
           headerShown: false,
         }}
-
       />
-
-
       <Drawer.Screen
         name="Groups"
         component={GroupChats}
@@ -110,11 +88,11 @@ const DrawerNavigator = () => {
           title: "Group Chats",
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="PrivateChat"
         component={PrivateChats}
         options={{ title: "Private Chat" }}
-      />
+      /> */}
       <Drawer.Screen
         name="Favourites"
         component={FavouritesScreen}
@@ -123,15 +101,14 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name="Settings"
         component={SettingScreen}
-        options={{ title: "Settings" }}
+        options={{ title: "Settings",
+         headerShadowVisible:true, headerTitleAlign:'center'}}
       />
-
       <Drawer.Screen
         name="Contacts"
         component={UserListScreen}
         options={{ title: "Contacts" }}
       />
-
       <Drawer.Screen
         name="NewChannel"
         component={NewChannelScreen}
@@ -159,27 +136,6 @@ const DrawerNavigator = () => {
 };
 
 const CustomProfile = () => {
-  // const [userName, setUserName] = useState('');
-  // const [picture,setUserPicture]  = useState('');
-  // const [number, setUserNumber] = useState('');
-  // const { picId } = useUserContext();
-  // const picture =require('../../assets/images/Logo.png');
-  // console.warn(picId);
-
-  // route or async
-
-  // const getUserData = async () => {
-  //   const userData = await Auth.currentAuthenticatedUser();
-  //   const { username, preferred_username } = userData.attributes;
-  //   setUserName(preferred_username);
-  //   // setUserPicture(picture);
-  //   setUserNumber(username);
-  // }
-
-  // useEffect(() => {
-  //   getUserData();
-
-  // }, [])
 
   return (
     <View >
@@ -203,46 +159,6 @@ const CustomProfile = () => {
 const CustomDrawerContent = (props) => {
   // const [tab, setTab] = useState("private");
   const { navigation } = props;
-
-
-  const logout = () => {
-    // Auth.signOut();
-    console.log("user _log out")
-    // navigation.navigate('signUp');
-  };
-  // useEffect(() => {
-  //   //         //for background notification
-  //   messaging().onNotificationOpenedApp((remoteMessage) => {
-  //     console.log(
-  //       "Notification caused app to open from background state:",
-  //       remoteMessage
-  //     );
-  //     const channel = JSON.parse(remoteMessage?.data?.channel || "");
-  //     console.log('This message belongs to channel with id - ', channel.id);
-  //     navigation.navigate("ChannelScreen", {
-  //       screen: "Chat",
-  //       params: { channelId: channel.id },
-  //     });
-  //   });
-  //   // for notification when app is in quit state
-  //   messaging()
-  //     .getInitialNotification()
-  //     .then((remoteMessage) => {
-  //       if (remoteMessage) {
-  //         console.log(
-  //           "Notification caused app to open from quite state:",
-  //           remoteMessage
-  //         );
-  //         const channel = JSON.parse(remoteMessage?.data?.channel || "");
-
-  //         console.log("This message belongs to channel with id - ", channel.id);
-
-  //         navigation.navigate("Channel", { channelId: channel.id });
-  //       }
-  //     });
-  // }, [])
-
-
   return (
     <DrawerContentScrollView {...props} style={{ flex: 1 }}>
       {/* <Text style={styles.title}>notJust Development</Text> */}
@@ -389,15 +305,8 @@ const CustomDrawerContent = (props) => {
             // onPress={() => navigation.openDrawer()}
             iconStyle={{ marginLeft: 108, }}
           /></TouchableOpacity>
-
-        {/* <Button
-            
-            title="Log Out"
-            onPress={logout}
-          />*/}
       </View>
     </DrawerContentScrollView>
-
   );
 };
 
@@ -547,304 +456,4 @@ const styles = StyleSheet.create({
 
 
 });
-
-// const actions = [{}
-//   // {
-//   //   text: "Accessibility",
-//   //   icon: require("./images/ic_accessibility_white.png"),
-//   //   name: "bt_accessibility",
-//   //   position: 2
-//   // },
-//   // {
-//   //   text: "Language",
-//   //   icon: require("./images/ic_language_white.png"),
-//   //   name: "bt_language",
-//   //   position: 1
-//   // },
-//   // {
-//   //   text: "Location",
-//   //   icon: require("./images/ic_room_white.png"),
-//   //   name: "bt_room",
-//   //   position: 3
-//   // },
-//   // {
-//   //   text: "Video",
-//   //   icon: require("./images/ic_videocam_white.png"),
-//   //   name: "bt_videocam",
-//   //   position: 4
-//   // }
-// ];
-
-// const InviteMember = (props) => {
-//   const { userId } = useAuthContext();
-
-//   const { navigation } = props;
-
-//   const onChannelSelect = (channel) => {
-//     // navigate to a screen for this channel
-//     navigation.navigate("ChannelScreen", {
-//       screen: "Chat",
-//       params: { channel },
-//     });
-//   };
-//   const publicFilters = {
-//     type: { $ne: "messaging" },
-//     members: { $in: [userId] },
-//   };
-//   return (
-//     <ChannelList onSelect={onChannelSelect} filters={publicFilters} />
-//   )
-// }
-
-// const MembersAddIcon = (props) => {
-//   // if (!route?.params?.channel) {
-//   //   return null;
-//   // }
-//   const { navigation } = props;
-
-//   return (
-//     // <Pressable
-//     //   // style={styles.icon}
-//     //   onPress={() =>
-//     //     <>
-//     //     <NewChannelScreen/>
-//     //     </>
-//     //   }
-//     // >
-//     //   <FontAwesome5 name="users" size={24} color="lightgray" />
-//     // </Pressable>
-//     <View style={{
-//       backgroundColor: "white",
-//       opacity: 1,
-//       flexDirection: "row",
-//       justifyContent: "center",
-//       alignItems:"center"
-
-//     }}>
-//       {/* <Text>Floating Action example</Text> */}
-//       {/* <FloatingAction
-//         // actions={actions}
-//         onPressItem={name => {
-//           console.log('selected button');
-//         }}
-//       />
-//       <FAB
-//                 color="blue"
-//                 size="small"
-//                 icon={{ name: 'edit', color: 'white', size: 20, }}
-//                 onPress={()=> console.log('pres')}
-
-//               /> */}
-//       <Icon 
-
-//         // raised
-//         // reverse
-//         // solid
-//         size={35}
-//         name='wind'
-//         type='feather'
-//         color='rgba(90, 154, 230, 1)'
-//         // color='blue'
-//         onPress={() => navigation.toggleDrawer()}
-
-//       />
-//     </View>
-//   );
-// };
-
-
-
-// const AllChats = (props) => {
-//   const { userId } = useAuthContext();
-
-//   const { navigation } = props;
-
-//   const onChannelSelect = (channel) => {
-//     // navigate to a screen for this channel
-//     navigation.navigate("ChannelScreen", {
-//       screen: "Chat",
-//       params: { channel },
-//     });
-//   };
-//   const onNewChat = () => {
-//     // console.log('press')
-//     // navigate to a screen for this channel
-//     navigation.navigate("Contacts");
-//   };
-//   const publicFilters = {
-//     // type: { $ne: "messaging" },
-//     members: { $in: [userId] },
-//   };
-//   return (
-//     <OverlayProvider >
-//       <SafeAreaView style={{ height: 120, }}>
-//         <View style={{
-//           // color: 'white',
-//           // opacity: 1,
-//           flexDirection: "row",
-//           justifyContent: 'space-evenly',
-//           alignItems: 'center',
-//           // margin: 10,
-//           height: 90,
-//           alignContent: 'space-between',
-//           // borderBottomRightRadius: 30,
-//           // backgroundColor: 'rgba(90,154,230,1)',
-//           // borderBottomWidth: 2,
-//           // borderBottomColor: 'lightgray',
-//           backgroundColor: 'white',
-//         }}>
-//           <Icon
-//             containerStyle={{
-//               width: 60,
-//               height: 40,
-//               alignContent: 'center',
-//               justifyContent: 'center',
-
-//             }}
-//             raised
-//             reverse
-//             solid
-//             size={30}
-//             name='chevrons-right'
-//             type='feather'
-//             color='#4c8bf5'
-//             // color='blue'
-//             onPress={() => navigation.openDrawer()}
-
-//           />
-//           <Text style={{ fontWeight: '700', fontSize: 18, marginHorizontal: 60, }}>All Chats</Text>
-//           <Button
-//             raised
-//             // reverse
-//             onPress={onNewChat}
-//             title="+ Chat"
-//             // icon={{
-//             //   name: 'dingding',
-//             //   type: 'ant-design',
-//             //   size: 20,
-//             //   color: 'rgba(90, 154, 230, 1)',
-//             // }}
-//             iconContainerStyle={{ marginRight: 0 }}
-//             titleStyle={{ fontWeight: '600', color: '#4c8bf5' }}
-//             buttonStyle={{
-//               backgroundColor: 'white',
-//               borderColor: 'gray',
-//               // borderWidth: 0,
-//               // borderRadius: 30,
-//               // width: 10,
-//               height: 45,
-//               // shadowRadius: 1,
-//               // shadowOffset: {width: 5, height: 15},
-//               // shadowColor: 'black',
-//               // shadowOpacity: 1,
-//               // borderRadius: 2,
-//             }}
-//             containerStyle={{
-//               width: 100,
-//               marginHorizontal: 0,
-//               marginVertical: 5,
-//               // marginBottom: 15,
-//               borderRadius: 30,
-//               // marginStart: 60,
-//             }}
-//           />
-//         </View>
-//       </SafeAreaView>
-
-//       <ChannelList onSelect={onChannelSelect} filters={publicFilters} />
-//     </OverlayProvider>
-//   )
-// }
-
-
-
-const PrivateChats = (props) => {
-  const { userId } = useAuthContext();
-
-  const { navigation } = props;
-
-  const onChannelSelect = (channel) => {
-    // navigate to a screen for this channel
-    navigation.navigate("ChannelScreen", {
-      screen: "Chat",
-      params: { channel },
-    });
-  };
-  const privateFilters = { type: "messaging", members: { $in: [userId] } };
-  return (
-    <OverlayProvider >
-      <SafeAreaView style={{ height: 120, }}>
-        <View style={{
-          // color: 'white',
-          // opacity: 1,
-          flexDirection: "row",
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-          // margin: 10,
-          height: 90,
-          alignContent: 'space-between',
-          // borderBottomRightRadius: 30,
-          // backgroundColor: 'rgba(90,154,230,1)',
-          // borderBottomWidth: 2,
-          // borderBottomColor: 'lightgray',
-
-        }}>
-          <Icon
-
-            // raised
-            // reverse
-            solid
-            size={25}
-            name='chevrons-right'
-            type='feather'
-            color='#4c8bf5'
-            // color='blue'
-            onPress={() => navigation.openDrawer()}
-
-          />
-          <Text style={{ fontWeight: '700', fontSize: 20, }}>Group Chats</Text>
-          <Button
-            // raised
-            onPress={() => { }}
-            title="Group +"
-            // icon={{
-            //   name: 'dingding',
-            //   type: 'ant-design',
-            //   size: 20,
-            //   color: 'rgba(90, 154, 230, 1)',
-            // }}
-            iconContainerStyle={{ marginRight: 10 }}
-            titleStyle={{ fontWeight: '600', color: '#4c8bf5' }}
-            buttonStyle={{
-              backgroundColor: 'transparent',
-              borderColor: 'gray',
-              borderWidth: 0,
-              borderRadius: 30,
-              // width: 10,
-              height: 45,
-              // shadowRadius: 1,
-              // shadowOffset: {width: 5, height: 15},
-              // shadowColor: 'black',
-              // shadowOpacity: 1,
-              // borderRadius: 2,
-            }}
-            containerStyle={{
-              width: 100,
-              marginHorizontal: 0,
-              marginVertical: 5,
-              // marginBottom: 15,
-              borderRadius: 30,
-              marginStart: 80,
-            }}
-          />
-        </View>
-      </SafeAreaView>
-
-      <ChannelList onSelect={onChannelSelect} filters={privateFilters} />
-    </OverlayProvider>
-  )
-}
-
-
-
 export default DrawerNavigator;

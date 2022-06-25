@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import * as React from 'react'
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { Channel, MessageList, MessageInput, ChannelAvatar, useChatContext, OverlayProvider, Chat } from "stream-chat-expo";
-import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { FontAwesome5, AntDesign } from "@expo/vector-icons";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+// import { FontAwesome5, AntDesign } from "@expo/vector-icons";
 import { Icon } from "@rneui/themed";
 
 const ChannelScreen = () => {

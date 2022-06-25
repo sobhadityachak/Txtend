@@ -69,45 +69,40 @@ const Dms = (props) => {
           // color:"white"
         }}>Direct messages</Text>
         <Button
-          raised
-
-          onPress={onNewChat}
-          title="Chat"
-          // titleStyle={{color: 'white'}}
-          icon={{
-            name: 'barcode',
-            type: 'ant-design',
-            size: 20,
-            color: 'transparent',
-            reverse: true,
-          }}
-          iconContainerStyle={{}}
-          titleStyle={{ fontWeight: '500', color: 'white' }}
-          buttonStyle={{
-            // backgroundColor: '#4c8bf5',
-            borderColor: 'gray',
-            borderWidth: 0,
-            borderRadius: 30,
-            // width: 10,
-            height: 45,
-            // shadowRadius: 1,
-            // shadowOffset: {width: 5, height: 15},
-            // shadowColor: 'black',
-            // shadowOpacity: 1,
-            // borderRadius: 2,
-
-          }}
-          containerStyle={{
-            width: 105,
-            // marginHorizontal: 0,
-            // marginVertical: 5,
-            // marginBottom: 15,
-            borderRadius: 30,
-            // marginStart: 80,
-            // alignSelf: 
-            backgroundColor: '#4c8bf5'
-          }}
-        />
+              raised
+              // reverse
+              onPress={onNewChat}
+              title="+ Chat"
+              // icon={{
+              //   name: 'dingding',
+              //   type: 'ant-design',
+              //   size: 20,
+              //   color: 'rgba(90, 154, 230, 1)',
+              // }}
+              iconContainerStyle={{ marginRight: 0 }}
+              titleStyle={{ fontWeight: '600', color: '#4c8bf5' }}
+              buttonStyle={{
+                backgroundColor: 'white',
+                borderColor: 'gray',
+                // borderWidth: 0,
+                // borderRadius: 30,
+                // width: 10,
+                height: 45,
+                // shadowRadius: 1,
+                // shadowOffset: {width: 5, height: 15},
+                // shadowColor: 'black',
+                // shadowOpacity: 1,
+                // borderRadius: 2,
+              }}
+              containerStyle={{
+                width: 100,
+                marginHorizontal: 0,
+                marginVertical: 5,
+                // marginBottom: 15,
+                borderRadius: 30,
+                // marginStart: 60,
+              }}
+            />
       </View>
     </SafeAreaView>
     <OverlayProvider  >

@@ -1,7 +1,7 @@
 import { Icon, Button } from "@rneui/base";
 import * as React from 'react'
 import { SafeAreaView, View, Text } from "react-native";
-import { OverlayProvider } from "stream-chat-expo";
+// import { OverlayProvider } from "stream-chat-expo";
 import { useAuthContext } from "../../contexts/AuthContext1";
 
 const FavouritesScreen = (props) => {
