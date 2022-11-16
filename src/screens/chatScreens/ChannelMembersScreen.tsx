@@ -8,12 +8,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ChannelAvatar, GroupAvatar } from "stream-chat-expo";
 
 // import React, { useState, useEffect } from 'react';
-import { Image, Platform, TouchableOpacity, StyleSheet } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { AntDesign } from '@expo/vector-icons';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+// import * as ImagePicker from 'expo-image-picker';
+// import { AntDesign } from '@expo/vector-icons';
 //
-import { Component } from "react";
-import { Linking } from 'react-native';
+// import { Component } from "react";
+// import { Linking } from 'react-native';
 
 import IconEnt from 'react-native-vector-icons/Entypo'
 import IconIon from 'react-native-vector-icons/Ionicons'

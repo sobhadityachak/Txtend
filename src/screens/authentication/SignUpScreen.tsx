@@ -1,6 +1,6 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import * as React from 'react'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -70,7 +70,7 @@ const NewSignUpScreen = () => {
       {
         id: sub,
         name: name,
-        image: `${image}`,
+        // image: `${image}`,
         number: username,
         // "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
       },
@@ -130,30 +130,42 @@ const NewSignUpScreen = () => {
       //   route?.params?.usrName, 
       //   route?.params?.code, 
       //   route?.params?.password);
-      await Auth.signIn(route?.params?.usrName, route?.params?.password);
-      if (!connectUser()) return (
-        <>
-          <ActivityIndicator />
-          <AppLoading />
-        </>
-      );
+      // if (!connectUser()) return (
+      //   <>
+      //     <ActivityIndicator />
+      //     <AppLoading />
+      //   </>
+      // );
       setSetting(true);
       connectUser();
+      await Auth.signIn(route?.params?.usrName, route?.params?.password);
     } catch (e) {
       console.log(e.message)
     }
   };
 
+  useEffect(() => {
+    connectUser();
+  }, []);
+
   return (
     <SafeAreaView >
       <ScrollView>
       <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root}>
-          <View><Text style={{ color: '#3B71F3', fontSize: 25, fontWeight: 'bold', marginTop: 0,}}>Set up your Profile</Text></View>
-
-        
-
-       
- <View style={styles.root1}>
+          <View style={{
+            alignItems: "center",
+            justifyContent: 'center'
+          }}><Text style={{ color: '#3B71F3', fontSize: 25, fontWeight: 'bold', marginTop: 0,}}>
+            Welcome to Txtend 
+            </Text>
+            <Text style={{ color: '#3B71F3', fontSize: 15, fontWeight: 'normal', marginTop: 5,}}>
+            Thank you for trusting in us
+            </Text>
+            <Text style={{ color: '#3B71F3', fontSize: 15, fontWeight: 'bold', marginTop: 5,}}>
+            Set up your Profile
+            </Text>
+          </View>
+            <View style={styles.root1}>
  <View style={imageUploaderStyles.container}>
           {
             image && <Image source={{ uri: image }} style={{
@@ -174,7 +186,7 @@ const NewSignUpScreen = () => {
         <CustomInput
           name="name"
           control={control}
-          placeholder="Name"
+          placeholder="Username for Txtend"
           rules={{
             required: 'Enter a User Name for Txtend',
             minLength: {
@@ -190,19 +202,19 @@ const NewSignUpScreen = () => {
         <CustomInput
           name="username"
           control={control}
-          placeholder="Enter your 10 Digit Phone number"
+          placeholder="Enter your Phone number"
           rules={{
             required: 'Phone Number with county code is required for password verification',
             length: {
 
             },
             minLength: {
-              value: 12,
-              message: 'Username should be at least 12 characters long',
+              value: 10,
+              message: 'Phone number should be at least 10 characters long',
             },
             maxLength: {
               value: 15,
-              message: 'Username should be max 15 characters long',
+              message: 'Phone number should be max 15 characters long',
             },
           }} secureTextEntry={undefined} />
         {/* <CustomInput
@@ -224,7 +236,7 @@ const NewSignUpScreen = () => {
         /> */}
 <TouchableOpacity>
         <CustomButton
-          text={setting ? 'Welcome to... Txtend' : 'All Set! Enter'}
+          text={setting ? 'Account Loading... ' : 'All Set! Enter'}
           onPress={handleSubmit(signUp)} bgColor={undefined} fgColor={undefined} />
           </TouchableOpacity>
           </View>

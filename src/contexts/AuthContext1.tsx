@@ -9,7 +9,7 @@ const AuthContext = createContext({
 });
 
 const AuthContextComponent = ({ children, client }) => {
-  const [userId, setUserId] = useState(undefined);
+  const [userId, setUserId] = useState("");
 
   const connectStreamChatUser = async () => {
     const userData = await Auth.currentAuthenticatedUser();
@@ -26,7 +26,7 @@ const AuthContextComponent = ({ children, client }) => {
       {
         id: sub,
         name: phone_number,
-        
+        // image:
           // "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
       },
       token //token dynamically generated from aws backend

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Txtend",
     "slug": "txtend",
-    "version": "1.0.1",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/android_logo.png",
     "scheme": "myapp",
@@ -20,13 +20,17 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.interesingTechnologies.txtend"
+      "bundleIdentifier": "com.txtend.myapp"
     },
     "android": {
-      "permissions": ["ACCESS_MEDIA_LOCATION","CAMERA","READ_EXTERNAL_STORAGE","RECORD_AUDIO","SYSTEM_ALERT_WINDOW"],
+      "permissions": ["ACCESS_MEDIA_LOCATION","CAMERA","WRITE_EXTERNAL_STORAGE","READ_EXTERNAL_STORAGE","RECORD_AUDIO","SYSTEM_ALERT_WINDOW"],
       "package": "com.txtend.myapp",
+<<<<<<< HEAD
       "versionCode": 9
-      // "googleServicesFile": "./google-services.json"
+=======
+      "versionCode": 11
+>>>>>>> 13dd8108a8440a81ad7b2c336f6e93dc4c5f23aa
+  
   },
   "web": {
     "favicon": "./assets/images/logo1.png"

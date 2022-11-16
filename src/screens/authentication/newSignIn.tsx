@@ -24,8 +24,8 @@ import { Auth } from 'aws-amplify';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 function passwordGenerator() {
-    return Math.random().toString(36).slice(2);
-  }
+  return Math.random().toString(36).slice(2);
+}
 
 const NewSignInScreen = () => {
   const { height } = useWindowDimensions();
@@ -33,9 +33,10 @@ const NewSignInScreen = () => {
   const [loading, setLoading] = useState(false);
   const [loadingOTP, setLoadingOTP] = useState(false);
   const [sendingOTP, setSendingOTP] = useState(false);
+  const [veriable, setVer] = useState(true);
 
   const [usrName, setusrName] = useState('');
-  // const [passwrd, setpassWrd] = useState('');
+  const [password, setpassWrd] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [code, onChangeCode] = useState('');
 
@@ -53,7 +54,7 @@ const NewSignInScreen = () => {
 
     setSendingOTP(true);
     try {
-      await Auth.forgotPassword("+91"+data.username);
+      await Auth.forgotPassword("+91" + data.username);
       // navigation.push('ConfirmPhone')
       //   const response = await Auth.signIn(data.username, data.password);
       //   console.log(response);
@@ -61,7 +62,7 @@ const NewSignInScreen = () => {
       Alert.alert('Oops', e.message);
     }
     setSendingOTP(!sendingOTP);
-    setusrName("+91"+data.username)
+    setusrName("+91" + data.username)
     setModalVisible(true)
   };
 
@@ -73,20 +74,21 @@ const NewSignInScreen = () => {
 
     try {
       await Auth.forgotPasswordSubmit(usrName, code, password);
-      // navigation.navigate("SignIn");
+      setpassWrd(password)
+      setModalVisible(false);
+      setVer(false);
+      Alert.alert("verfied", "Congratulations Your are one more step Away!");
+    } catch (e) {
+      Alert.alert('Oops', e.message);
     }
-    catch (e) {
-      // Alert.alert('Oops', e.message);
-      // return;
-    }
-    try {
-      // await Auth.signIn(usrName, password);
-      navigation.replace('Profile', {usrName,password});
-    } catch (error) {
-      Alert.alert('Oops', error.message)
-    }
+    // try {
+    // await Auth.signIn(usrName, password);
+    // navigation.replace('Profile', { usrName, password });
+    // } catch (error) {
+    // Alert.alert('Oops', error.message)
+    // }
     // finally{
-      // setLoadingOTP(!loadingOTP);
+    // setLoadingOTP(!loadingOTP);
     // }
   };
 
@@ -100,7 +102,7 @@ const NewSignInScreen = () => {
     } catch (e) {
       Alert.alert('Oops', e.message);
     }
-    finally{
+    finally {
       setLoading(!loading);
     }
   };
@@ -111,10 +113,10 @@ const NewSignInScreen = () => {
   return (
     <SafeAreaView style={{ paddingTop: 0, }}>
       <ScrollView showsVerticalScrollIndicator={false}>
-      <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root1}>
-      <View><Text style={{ color: '#3B71F3', fontSize: 28, fontWeight: 'bold', marginTop: 20,}}>Sign In</Text></View>
-        
-          
+        <ImageBackground source={require('../../../assets/images/bckgnd.png')} style={styles.root1}>
+          <View><Text style={{ color: '#3B71F3', fontSize: 28, fontWeight: 'bold', marginTop: 20, }}>Sign In</Text></View>
+
+
           <View style={styles.centeredView}>
             <Modal
               animationType="slide"
@@ -162,39 +164,43 @@ const NewSignInScreen = () => {
             </Pressable> */}
           </View>
           <View style={styles.root2}>
-          <CustomInput
-            name="username"
-            control={control}
-            placeholder="enter your 10 digit phone number"
-            rules={{
-              required: 'Phone Number with county code is required for password verification',
-              length: {
+            <CustomInput
+              name="username"
+              control={control}
+              placeholder="enter your 10 digit phone number"
+              rules={{
+                required: 'Phone Number with county code is required for password verification',
+                length: {
 
-              },
-              minLength: {
-                value: 10,
-                message: 'Username should be at least 12 characters long',
-              },
-              maxLength: {
-                value: 10,
-                message: 'Username should be max 15 characters long',
-              },
-            }} secureTextEntry={undefined} />
+                },
+                minLength: {
+                  value: 10,
+                  message: 'Username should be at least 12 characters long',
+                },
+                maxLength: {
+                  value: 10,
+                  message: 'Username should be max 15 characters long',
+                },
+              }} secureTextEntry={undefined} />
+            {(veriable ?
+              <CustomButton
+                text={loading ? 'Sending OTP...' : 'Send OTP!'}
+                onPress={handleSubmit(onSendOtpPressed)} bgColor={undefined} fgColor={undefined} />
+              : <CustomButton
+                text={"Proceed to next step"}
+                onPress={() => (navigation.replace('Profile', { usrName, password }))}
+                bgColor={undefined} fgColor={undefined}
+              />
+            )}
 
-          <CustomButton
-            text={sendingOTP ? 'Sending OTP...' : 'Send OTP'}
-            onPress={handleSubmit(onSendOtpPressed)}
-            bgColor={undefined} fgColor={undefined} />
+            {/* <SocialSignInButtons /> */}
 
+            <CustomButton
+              text="Don't have an account? Create one"
+              onPress={onSignUpPress}
+              type="TERTIARY" bgColor={undefined} fgColor={undefined} />
+          </View>
 
-          {/* <SocialSignInButtons /> */}
-
-          <CustomButton
-            text="Don't have an account? Create one"
-            onPress={onSignUpPress}
-            type="TERTIARY" bgColor={undefined} fgColor={undefined} />
-            </View>
-        
         </ImageBackground>
       </ScrollView>
     </SafeAreaView>
@@ -227,7 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    
+
   },
   modalView: {
     margin: 20,
@@ -283,7 +289,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 50,
     fontSize: 18,
-    textAlign : 'center',
+    textAlign: 'center',
 
   }
 });

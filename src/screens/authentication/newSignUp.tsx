@@ -36,9 +36,9 @@ const NewSignUpScreen = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [loadingOTP, setLoadingOTP] = useState(false);
-  const [sendingOTP, setSendingOTP] = useState(false);
+  const [veriable, setVer] = useState(true);
 
-  const [usrName, setusrName] = useState('');
+  const [usrName, setuserName] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [code, onChangeCode] = useState('');
   const [password, setPassword] = useState('');
@@ -58,7 +58,7 @@ const NewSignUpScreen = () => {
 
     try {
       await Auth.signUp({
-        username: '+91' + username,
+        username: "+91" + username,
         password,
         // attributes: {
         //   picture: image,
@@ -67,12 +67,16 @@ const NewSignUpScreen = () => {
       });
 
       // navigation.replace('ConfirmPhone', { username, password });
+<<<<<<< HEAD
       setModalVisible(true);
       setusrName("+91" + username);
+=======
+      setuserName("+91" + username);
+>>>>>>> 13dd8108a8440a81ad7b2c336f6e93dc4c5f23aa
     } catch (e) {
       Alert.alert('Oops', e.message);
     }
-    
+    setModalVisible(true);
   };
 
 
@@ -102,20 +106,19 @@ const NewSignUpScreen = () => {
     
     try {
       await Auth.confirmSignUp(usrName, code);
-
-    Alert.alert("verfied","Congratulations Your are all Set!"); 
+      setModalVisible(false);
+      setVer(false);
+      Alert.alert("verfied","Congratulations Your are one more step Away!"); 
     } catch (e) {
       Alert.alert('Oops', e.message);
     }
 
-    try {
+    // finally {
       // await Auth.signIn(usrName, password);
-      setModalVisible(false);
-      navigation.replace('Profile', {usrName,password});
-
-    } catch (error) {
-      Alert.alert('Oops', error.message)
-    }
+    // }
+    // } catch (error) {
+      // Alert.alert('Oops', error.message)
+    // }
     // finally{
     //   setLoadingOTP(!loadingOTP);
     // }
@@ -160,7 +163,7 @@ const NewSignUpScreen = () => {
               }}
             >
               <View style={styles.centeredView}>
-                <View style={styles.modalView}> 
+                <View style={styles.modalView}>
                   <TextInput
 
                     style={styles.input}
@@ -202,7 +205,7 @@ const NewSignUpScreen = () => {
               placeholder="enter your 10 digit phone number"
               
               rules={{
-                required: 'Phone Number with county code is required for password verification',
+                required: 'Phone Number is required for password verification',
                 length: {
 
                 },
@@ -217,10 +220,16 @@ const NewSignUpScreen = () => {
               }} secureTextEntry={undefined}
                />
 
+            {(veriable ? 
             <CustomButton
               text={loading ? 'Sending OTP...' : 'Send OTP!'}
               onPress={handleSubmit(onRegisterPressed)} bgColor={undefined} fgColor={undefined} />
-
+              : <CustomButton
+                  text={"Proceed to next step"}
+                  onPress={()=>(navigation.replace('Profile', {usrName,password}))}
+                  bgColor={undefined} fgColor={undefined}
+                  />
+            )}
             {/* <CustomButton
             text="Forgot password?"
             onPress={onForgotPasswordPressed}

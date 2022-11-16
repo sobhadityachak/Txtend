@@ -11,24 +11,24 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, ColorSchemeName, View } from "react-native";
+import { ColorSchemeName, View } from "react-native";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import CustomSignUpScreen from "../screens/authentication/CustomSignUpScreen";
+// import CustomSignUpScreen from "../screens/authentication/CustomSignUpScreen";
 import { useAuthContext } from "../contexts/AuthContext";
 import DrawerNavigator from "./DrawerNavigateScreens";
 import {Auth, Hub} from 'aws-amplify';
 
-import FinalSignInScreen from "../screens/authentication/finalSignIn";
+// import FinalSignInScreen from "../screens/authentication/finalSignIn";
 import SignUpScreen from "../screens/authentication/SignUpScreen";
 import NewSignUpScreen from "../screens/authentication/newSignUp";
 import NewSignInScreen from "../screens/authentication/newSignIn";
 // import ForgotPasswordScreen from "../screens/authentication/ForgetPasswordScreen";
 // import NewPasswordScreen from "../screens/authentication/NewPasswordScreen";
 import AppLoading from "expo-app-loading";
-import FinalSignUpScreen from "../screens/authentication/finalSignUp";
+// import FinalSignUpScreen from "../screens/authentication/finalSignUp";
 
 
 export default function Navigation({
@@ -64,7 +64,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 // });
 
 function RootNavigator() {
-  const { userId } = useAuthContext();
+  const { setUserId } = useAuthContext();
 
   // if (!userId) {
   //   return <ActivityIndicator />;
@@ -116,7 +116,8 @@ function RootNavigator() {
   if (user === undefined) {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <AppLoading />
+        {/* <AppLoading /> */}
+        {/* <SplashScreen/> */}
       </View>
     );
   }
