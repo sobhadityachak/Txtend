@@ -35,7 +35,7 @@ const ChannelScreen = () => {
   }
 
   return (
-    <OverlayProvider topInset={top} bottomInset={bottom}>
+    <OverlayProvider topInset={top} bottomInset={-10}>
             <Chat client={client}>
     <SafeAreaView style={styles.container}>
 

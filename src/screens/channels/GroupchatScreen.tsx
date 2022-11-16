@@ -1,7 +1,7 @@
 import { Icon } from "@rneui/base";
 import { Button } from "@rneui/themed";
 import * as React from 'react'
-import { Text, View, SafeAreaView } from "react-native";
+import { Text, View, SafeAreaView, } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { OverlayProvider, ChannelList, ChannelListMessenger, Chat, useChatContext } from "stream-chat-expo";
 import { useAuthContext, useUserContext } from "../../contexts/AuthContext1";

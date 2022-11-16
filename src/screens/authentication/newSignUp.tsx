@@ -68,7 +68,7 @@ const NewSignUpScreen = () => {
 
       // navigation.replace('ConfirmPhone', { username, password });
       setModalVisible(true);
-      setusrName(username);
+      setusrName("+91" + username);
     } catch (e) {
       Alert.alert('Oops', e.message);
     }

@@ -25,7 +25,7 @@
     "android": {
       "permissions": ["ACCESS_MEDIA_LOCATION","CAMERA","READ_EXTERNAL_STORAGE","RECORD_AUDIO","SYSTEM_ALERT_WINDOW"],
       "package": "com.txtend.myapp",
-      "versionCode": 8
+      "versionCode": 9
       // "googleServicesFile": "./google-services.json"
   },
   "web": {

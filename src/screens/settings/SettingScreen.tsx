@@ -155,7 +155,8 @@ const SettingScreen = () => {
           <TouchableOpacity onPress={_suggestions}>
             <Text style={styles.text3}>Suggestions</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={_faq}>
+          <TouchableOpacity onPress={_faq}>                
+          .
             <Text style={styles.text}>FAQ</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={_privacy}>
