@@ -113,7 +113,7 @@ const AuthContextComponent = ({ children, client, }) => {
   //     requestPermission();
   //     registerDevice();
   //   }
-  // },[userId])
+  // },[userbId])
 
   return (
     <>
